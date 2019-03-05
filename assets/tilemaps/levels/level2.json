@@ -65,7 +65,7 @@
         {
          "name":"maxTime",
          "type":"int",
-         "value":20
+         "value":10
         }],
  "renderorder":"right-down",
  "tiledversion":"1.2.2",
