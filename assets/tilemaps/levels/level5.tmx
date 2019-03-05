@@ -62,7 +62,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="levelInfo">
-  <object id="2" name="SpawnPoint" x="16" y="96" width="16" height="16"/>
+  <object id="2" name="SpawnPoint" x="250" y="67" width="16" height="16"/>
   <object id="3" name="GoalArea" x="306" y="16" width="44" height="48"/>
   <object id="5" name="Spike" x="288" y="80" width="16" height="16"/>
   <object id="6" name="Spike" x="304" y="80" width="16" height="16"/>
