@@ -38,8 +38,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":250,
-                 "y":67
+                 "x":16,
+                 "y":96
                 }, 
                 {
                  "height":48,
@@ -107,7 +107,7 @@
         {
          "columns":4,
          "firstgid":1,
-         "image":"spritesheet.png",
+         "image":"..\/..\/..\/..\/CodingGame-GameJam\/assets\/tilemaps\/levels\/spritesheet.png",
          "imageheight":48,
          "imagewidth":64,
          "margin":0,
@@ -181,7 +181,7 @@
         {
          "columns":8,
          "firstgid":13,
-         "image":"Tileset.png",
+         "image":"..\/..\/..\/..\/CodingGame-GameJam\/assets\/tilemaps\/levels\/Tileset.png",
          "imageheight":96,
          "imagewidth":128,
          "margin":0,
