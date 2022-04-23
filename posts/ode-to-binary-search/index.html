@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Introduction Given a sorted array, we can &amp;ldquo;binary search&amp;rdquo; through an array to find a certain element by comparing the middle element to our current element and then deciding either that we have found what we are looking for, that what we are looking for is in the left half of the array, or that what we are looking for is in the right half of the array." />
+<meta name="keywords" content=", Algorithms, Technical" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="/posts/ode-to-binary-search/" />
+
+
+    <title>
+        
+            Ode to Binary Search :: Greg Zborovsky  — Technical Blog
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.4e5c639214707eff609bb55fe49e183dee42258a73bc90e4cc7b0a84f900798a.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Ode to Binary Search">
+<meta itemprop="description" content="Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Introduction Given a sorted array, we can &ldquo;binary search&rdquo; through an array to find a certain element by comparing the middle element to our current element and then deciding either that we have found what we are looking for, that what we are looking for is in the left half of the array, or that what we are looking for is in the right half of the array."><meta itemprop="datePublished" content="2021-04-05T12:00:00-04:00" />
+<meta itemprop="dateModified" content="2021-04-05T12:00:00-04:00" />
+<meta itemprop="wordCount" content="2034"><meta itemprop="image" content=""/>
+<meta itemprop="keywords" content="Algorithms,Technical," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content=""/>
+
+<meta name="twitter:title" content="Ode to Binary Search"/>
+<meta name="twitter:description" content="Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Introduction Given a sorted array, we can &ldquo;binary search&rdquo; through an array to find a certain element by comparing the middle element to our current element and then deciding either that we have found what we are looking for, that what we are looking for is in the left half of the array, or that what we are looking for is in the right half of the array."/>
+
+
+
+
+    <meta property="og:title" content="Ode to Binary Search" />
+<meta property="og:description" content="Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Introduction Given a sorted array, we can &ldquo;binary search&rdquo; through an array to find a certain element by comparing the middle element to our current element and then deciding either that we have found what we are looking for, that what we are looking for is in the left half of the array, or that what we are looking for is in the right half of the array." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/ode-to-binary-search/" /><meta property="og:image" content=""/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-05T12:00:00-04:00" />
+<meta property="article:modified_time" content="2021-04-05T12:00:00-04:00" /><meta property="og:site_name" content="Greg Zborovsky" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-04-05 12:00:00 -0400 EDT" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">greg</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/posts">Blog</a></li><li><a href="/projects">Projects</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+                <span class="theme-toggle not-selectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+ </svg></span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        10 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="/posts/ode-to-binary-search/">Ode to Binary Search</a>
+      </h1>
+
+      
+
+      
+        <hr />
+        <aside id="toc">
+          <div class="toc-title">Table of Contents</div>
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#implementation-details">Implementation Details</a></li>
+    <li><a href="#generalizations">Generalizations</a>
+      <ul>
+        <li><a href="#on-what-can-it-be-used">On What Can it be Used?</a></li>
+        <li><a href="#where-should-it-be-used">Where Should it be Used?</a></li>
+        <li><a href="#extending-it-to-floating-point">Extending it to Floating Point</a></li>
+        <li><a href="#without-an-end-value">Without an End Value</a></li>
+      </ul>
+    </li>
+    <li><a href="#applications">Applications</a>
+      <ul>
+        <li><a href="#guessing-games">Guessing Games</a></li>
+        <li><a href="#calculating-inverse-cdf">Calculating Inverse CDF</a></li>
+        <li><a href="#calculating-the-inverse-of-monotonic-functions">Calculating the Inverse of Monotonic Functions</a></li>
+        <li><a href="#finding-the-size-of-a-dartboard">Finding the Size of a Dartboard</a></li>
+      </ul>
+    </li>
+    <li><a href="#informal-ramblings">Informal Ramblings</a></li>
+    <li><a href="#more-resources">More Resources</a></li>
+  </ul>
+</nav>
+        </aside>
+        <hr />
+
+      
+
+      <div class="post-content">
+        <p>Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Given a sorted array, we can &ldquo;binary search&rdquo; through an array to find a certain element by comparing the middle element to our current element and then deciding either that we have found what we are looking for, that what we are looking for is in the left half of the array, or that what we are looking for is in the right half of the array.</p>
+<p>Why should we care about this algorithm? Given a sorted list, searching for a certain element is many times faster with binary search than with linear search. Linear search has time complexity \(\mathcal{O}(n)\) whereas binary search has time complexity \(\mathcal{O}(\log{n})\) where \(n\) is the number of elements you are searching through.</p>
+<p>For reference (Each test was run 100 times, ex: it takes 1.73 seconds to search through 100,000,000 million items 100 times [This is <em>fast</em> - Java&rsquo;s optimizations make this way faster than it would be unoptimized. I tested without optimizations as well and it looks roughly 30x slower]):</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>Linear Search</th>
+<th>Binary Search</th>
+<th>Speed Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\(10^1\)</td>
+<td>0.000011</td>
+<td>0.000012</td>
+<td>0.95x</td>
+</tr>
+<tr>
+<td>\(10^2\)</td>
+<td>0.000088</td>
+<td>0.000037</td>
+<td>2.41x</td>
+</tr>
+<tr>
+<td>\(10^3\)</td>
+<td>0.000226</td>
+<td>0.000058</td>
+<td>3.88x</td>
+</tr>
+<tr>
+<td>\(10^4\)</td>
+<td>0.001670</td>
+<td>0.000021</td>
+<td>80.28x</td>
+</tr>
+<tr>
+<td>\(10^5\)</td>
+<td>0.002599</td>
+<td>0.000033</td>
+<td>78.03x</td>
+</tr>
+<tr>
+<td>\(10^6\)</td>
+<td>0.015747</td>
+<td>0.000039</td>
+<td>409.00x</td>
+</tr>
+<tr>
+<td>\(10^7\)</td>
+<td>0.196274</td>
+<td>0.000054</td>
+<td>3614.62x</td>
+</tr>
+<tr>
+<td>\(10^8\)</td>
+<td>1.738984</td>
+<td>0.000123</td>
+<td>14195.78x</td>
+</tr>
+</tbody>
+</table>
+<p>As sizes become larger and larger, binary search gains a greater and greater speed advantage, and a significant one at that.</p>
+<h2 id="implementation-details">Implementation Details</h2>
+<p>An example implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> list<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> low <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> high <span style="color:#f92672">=</span> list<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">&gt;=</span> low<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>low <span style="color:#f92672">+</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">&lt;</span> list<span style="color:#f92672">[</span>mid<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>            high <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">==</span> list<span style="color:#f92672">[</span>mid<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mid<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">-</span> low<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>This implementation is fairly common, but binary search can interestingly be done very similarly with recursion:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binSearchRecursive</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> list<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">&gt;=</span> low<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>low <span style="color:#f92672">+</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">&lt;</span> list<span style="color:#f92672">[</span>mid<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> binSearchRecursive<span style="color:#f92672">(</span>list<span style="color:#f92672">,</span> key<span style="color:#f92672">,</span> low<span style="color:#f92672">,</span> mid<span style="color:#f92672">-</span>1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">==</span> list<span style="color:#f92672">[</span>mid<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mid<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> binSearchRecursive<span style="color:#f92672">(</span>list<span style="color:#f92672">,</span> key<span style="color:#f92672">,</span> mid<span style="color:#f92672">+</span>1<span style="color:#f92672">,</span> high<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">-</span> low<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>where low and high are 0 and list.length-1 respectively on the first call.</p>
+<p>Some things to be careful about in either implementation:</p>
+<ul>
+<li>\(\frac{low+high}{2}\) could cause an overflow if both low and high are close to their maximum datatype value. \(low + \frac{high-low}{2}\) is slightly safer, but will still cause issues when high is close to the maximum allowed value and low is close to the minimum allowed value. For reading on an overflow save implementation, refer to <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0811r3.html">http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0811r3.html</a></li>
+<li>If looking for a duplicate element, the current implementation will return the index of one of the duplicates, but not necessarily the first or the last index of a certain element. (The search can be adjusted to fulfill either goal.)</li>
+</ul>
+<h2 id="generalizations">Generalizations</h2>
+<h3 id="on-what-can-it-be-used">On What Can it be Used?</h3>
+<p>We know that we can binary search on any sorted array. More generally, we can binary search on any function which is monotonic within the range we want to search. In the example of binary search introduced in class, our sorted array is monotonically increasing and our function is \(f(x) = array[x]\).</p>
+<p>Note that this function does not need to be stored in memory, nor in an array. For example, we can binary search on \(f(x)=x^2\) in the domain \([0, n]\) where \(n \in \mathbb{N}\) by simply evaluating f(x) whenever we need its value.</p>
+<h3 id="where-should-it-be-used">Where Should it be Used?</h3>
+<p>So we can binary search on any monotonic function, but is binary search always the best option?</p>
+<p>No. The easiest case is to consider a LinkedList, like SML&rsquo;s default list, for which finding the value of \(f(x)\) is, on average, \(\mathcal{O}(n)\). If we we were to binary search for the index of a certain value in a LinkedList, it would take \(\mathcal{O}(n\log{n})\) as opposed to \(\mathcal{O}(n)\) for a regular linear search.</p>
+<p>Let \(r = \) random access time complexity for \(f(x)\). Binary search should be used when \(r\) is less than \(\mathcal{O}(\frac{m}{\log{n}})\) where \(n\) is the size of whatever you are searching over and \(m\) is the time needed to iterate over all \(n\) elements. The final time complexity for a binary search will be \(\mathcal{O}(r\cdot\log{n})\). In the case of an array where \(r=\mathcal{O}(1)\), the time complexity for binary search is clearly \(\mathcal{O}(\log{n})\).</p>
+<h3 id="extending-it-to-floating-point">Extending it to Floating Point</h3>
+<p>There is no restriction that binary search only functions on integers. With a small change to the implementation, binary search can be adjusted to work on floating point data.</p>
+<p>A binary search on monotonic floating point data will approach some exact value, but will terminate once \(high - low\) is less than some constant \(\epsilon\).</p>
+<p>The runtime analysis does not change much. We can consider \(\epsilon\) to be our unit size, thus our entire search will be over roughly \((high-low)\cdot\epsilon\) values, so the time complexity ends up as \(\mathcal{O}(\log{\epsilon(high-low)})=\mathcal{O}(\log{(high-low)}) + \log{\epsilon})\). If we treat \(\epsilon\) as a constant, the final runtime complexity remains as \(\mathcal{O}(\log{(high-low)})\).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">floatingPointBinarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">double</span> key<span style="color:#f92672">,</span> <span style="color:#66d9ef">double</span> lowVal<span style="color:#f92672">,</span> <span style="color:#66d9ef">double</span> highVal<span style="color:#f92672">,</span> <span style="color:#66d9ef">double</span> epsilon<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> low <span style="color:#f92672">=</span> lowVal<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> high <span style="color:#f92672">=</span> highVal<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">-</span> low <span style="color:#f92672">&gt;</span> epsilon<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> mid <span style="color:#f92672">=</span> low <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">-</span> low<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// f is some function which takes in a double and returns a double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// it must be monotonic on [lowVal, highVal]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>f<span style="color:#f92672">(</span>mid<span style="color:#f92672">)</span> <span style="color:#f92672">&lt;</span> key<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            low <span style="color:#f92672">=</span> mid<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            high <span style="color:#f92672">=</span> mid<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> low <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">-</span> low<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="without-an-end-value">Without an End Value</h3>
+<p>It turns out we don&rsquo;t always need a full range to binary search over for an answer. Having just one point is enough data to eventually use binary search.</p>
+<p>With a target value \(t\) and a given value \(f(x)\) evaluated at \(x\), there exist 3 cases.</p>
+<ol>
+<li>\(f(x) = t \implies \) you have the answer.</li>
+<li>\(f(x) &gt; t \implies \) we want to find a value \(f(y)\) which is \(&lt;\) t.</li>
+<li>\(f(x) &lt; t \implies \) we want to find a value \(f(y)\) which is \(&gt;\) t.</li>
+</ol>
+<p>Case 1 is trivial.</p>
+<p>Case 2 and 3 are essentially equivalent. I will cover case 2. The idea is to create a variable \(y\) equal to \(x\) and while(\(f(y) &gt; t\)), double the distance of \(y\) from \(x\). This does require \(f(y)\) to eventually cross \(t\) or the process will not terminate. Because the distance from \(y\) to \(x\) increases at an exponential rate, it will only be doubled a logarithmic number of times with respect to the size of the final search region. Overall complexity of the binary search including this step remains at \(\mathcal{O}(r\cdot\log{n})\) where \(r = \) random access time complexity for \(f(x)\).</p>
+<p>Case 3 is equivalent to Case 2 with the only difference being that you repeat while(\(f(y) &lt; t\)).</p>
+<p>Note: I have seen this concept used often where you aren&rsquo;t initially given too much information, but it does require monotonicity across the entire range that \(y\) expands across.</p>
+<h2 id="applications">Applications</h2>
+<p>I&rsquo;ll discuss some interesting binary search related problems here.</p>
+<h3 id="guessing-games">Guessing Games</h3>
+<p>You can ask me at most 20 questions. With no other information, what day and year is my birthday on?</p>
+<p>The oldest human is still younger than 130 years old, and every year has at most 366 days. Thus, my birthday must be on one of \(366\cdot130=47580\) days (between today and 47580 days ago). We cannot ask 47580 questions, so we must do something a bit more clever.</p>
+<p>You can consider this is as a binary search between [-47580, 0]. You can first ask whether I was born before or on \((47580+0)/2=23790\) days ago. If I say yes, then the binary search would continue within the range [-47580, -23790]. Otherwise, it would continue within the range [-23789, 0].</p>
+<p>Each step reduces the number of days we have to consider. In total, we will need exactly \(\lceil \log_{2}{47580} \rceil=16\) questions, which is actually less than 20.</p>
+<p>In this game our function is:</p>
+<p>\[f(x)=\begin{cases} 0 &amp; \text{if } x &lt;= birthday \\ 1 &amp; \text{if } x &gt; birthday \end{cases}\]</p>
+<p>Despite having many duplicate values, our function is indeed monotonically increasing. The target date, my birthday, would be the index of the final 0 in the sequence. It turns out this technique of having a monotonic function which only returns 0 and 1, or true and false, is fairly applicable to many competitive programming problems.</p>
+<h3 id="calculating-inverse-cdf">Calculating Inverse CDF</h3>
+<p>People taking AMS 310 right now (Survey of Probability and Statistics) are probably familiar with CDFs (Cumulative Distribution Functions). Let \(F(x)\( be a CDF and let \(f(x)\) be a PDF (Probability Distribution Function).</p>
+<p>Since
+\[F(x) = \sum_{n=0}^{x} f(x)\]
+and
+\[f(x) &gt;= 0, \forall x \in \mathbb{Q}, \]</p>
+<p>F(x) must be a monotonically increasing function, and thus we can binary search over it.</p>
+<p>To calculate \(F^{-1}(y)\), we can binary search over \(F(x)\) where \(x \in\) [min(domain of distribution), max(domain of distribution)] while searching for the value y. We can choose some arbitrary yet small enough \(\epsilon\) value such as \(\epsilon=10^{-6}\) and use \((low+high)/2\) as the final value of \(F^{-1}(y)\) at termination.</p>
+<h3 id="calculating-the-inverse-of-monotonic-functions">Calculating the Inverse of Monotonic Functions</h3>
+<p>I previously described how to calculate the values of the inverse CDF function, but binary search can be used to find the values of the inverse of any monotonic function by applying similar reasoning.</p>
+<p>One more common example of this is calculating the square root of a value. There is no obvious way to calculate a square root, but calculating the square of a value is trivial.</p>
+<p>To calculate \(sqrt(x)\), we can binary search over \(n \in [0, x]\) and calculate the value of \(n \cdot n\). If \(n\cdot n &gt; x\), we can replace the high value with the middle value. Otherwise, we can replace the low value with the middle value. Again, once \(high-low\) is less than some value \(\epsilon\), we can return \((low+high)/2\).</p>
+<p>In the case of sqrt(x), this method isn&rsquo;t worth it. On modern processors, calculating sqrt(x) is pretty fast, but more difficult operations or functions that aren&rsquo;t already implemented could benefit from this method.</p>
+<h3 id="finding-the-size-of-a-dartboard">Finding the Size of a Dartboard</h3>
+<p>This question actually comes from a Google Code Jam Competition, which is a competition for competitive programmers. You can think of it as a math team contest but for programmers.</p>
+<p><a href="https://codingcompetitions.withgoogle.com/codejam/round/000000000019fef2/00000000002d5b63#problem%7D">Code Jam Problem Link</a></p>
+<p>This problem doesn&rsquo;t require binary search, but using binary search makes the problem much simpler. The link I&rsquo;ve given has both the problem statement and the solution/analysis.</p>
+<p>This problem will require several different problem solving techniques and using binary search multiple times in different dimensions. This is a difficult problem, only recommended for people who are really interested in spending some time on solving a problem.</p>
+<h2 id="informal-ramblings">Informal Ramblings</h2>
+<p>A bit of a lighter section—some more of my own thoughts on binary searching as a concept.</p>
+<p>Even in real life, people tend to use binary search to solve small life problems. Looking through a dictionary? You&rsquo;re probably using binary search. Dictionaries are ordered alphabetically, so you&rsquo;re probably using some kind of binary search to flip through pages faster. Broke some code but you don&rsquo;t know where? It&rsquo;s pretty common for people to test the first half, then the first 3/4, then the first 7/8, etc of their code, just to find where a bug is; this is also a form of binary search. Interestingly enough, git supports this type of debugging through git bisect, which will binary search over a range of commits with the help of the user to find where a branch turns from good to bad.</p>
+<p>Another real life example, although hidden away, lives within switch statements. In the JVM, memory-efficient switches with a small ranges of indices will be often be implemented through an \(\mathcal{O}(1)\) call to a table, but if the switch cases are sparse, the JVM will switch to a form of binary search to find the matching case. More info here: <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-3.html#jvms-3.10">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-3.html#jvms-3.10</a></p>
+<h2 id="more-resources">More Resources</h2>
+<p>Some of the resources I&rsquo;ve used or seen:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">Binary Search on Wikipedia</a></li>
+<li><a href="https://www.youtube.com/watch?v=GU7DpgHINWQ">Binary Search Tutorial by Errichto</a></li>
+<li><a href="https://leetcode.com/explore/learn/card/binary-search/">Binary Search Concepts on Leetcode</a></li>
+<li><a href="https://codeforces.com/blog/entry/9901">Some people&rsquo;s implementations of Binary Search on Codeforces</a></li>
+</ul>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="tags/algorithms/">Algorithms</a></span>
+        <span class="tag"><a href="tags/technical/">Technical</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        2034 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2021-04-05 12:00
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+        <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+        </div>
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="/posts/linking-with-linked-lists/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">Linking With Linked Lists</span>
+                </a>
+            </span>
+            
+
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.a2c5b062c87998f04d1b5dfb6a89a1b2d79786c21d0cb63a05e8a2082984b64b77d80955e3b97eab17273775162ba372511b711fea2f7608f216e68a67bb22d6.js" integrity="sha512-osWwYsh5mPBNG137aomhsteXhsIdDLY6BeiiCCmEtkt32AlV47l&#43;qxcnN3UWK6NyURtxH&#43;ovdgjyFuaKZ7si1g=="></script>
+
+
+
+    </body>
+</html>

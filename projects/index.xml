@@ -1,0 +1,57 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Projects on Greg Zborovsky</title>
+        <link>/projects/</link>
+        <description>Recent content in Projects on Greg Zborovsky</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+        <lastBuildDate>Fri, 27 Aug 2021 12:00:00 -0400</lastBuildDate>
+        <atom:link href="/projects/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Efficient Barnes–Hut CUDA Simulation</title>
+            <link>/projects/nbody-simulation/</link>
+            <pubDate>Fri, 27 Aug 2021 12:00:00 -0400</pubDate>
+            
+            <guid>/projects/nbody-simulation/</guid>
+            <description>More info coming soon!</description>
+            <content type="html"><![CDATA[<p>More info coming soon!</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Chess Engine</title>
+            <link>/projects/chess-engine/</link>
+            <pubDate>Wed, 25 Nov 2020 12:00:00 -0400</pubDate>
+            
+            <guid>/projects/chess-engine/</guid>
+            <description>More info coming soon!</description>
+            <content type="html"><![CDATA[<p>More info coming soon!</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Software Graphics Engine</title>
+            <link>/projects/software-graphics-engine/</link>
+            <pubDate>Fri, 12 Jun 2020 12:00:00 -0400</pubDate>
+            
+            <guid>/projects/software-graphics-engine/</guid>
+            <description>More info coming soon!</description>
+            <content type="html"><![CDATA[<p>More info coming soon!</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Simple Platformer</title>
+            <link>/projects/simple-platformer/</link>
+            <pubDate>Wed, 05 Jun 2019 12:00:00 -0400</pubDate>
+            
+            <guid>/projects/simple-platformer/</guid>
+            <description>More info coming soon!</description>
+            <content type="html"><![CDATA[<p>More info coming soon!</p>
+]]></content>
+        </item>
+        
+    </channel>
+</rss>

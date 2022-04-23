@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithms on Greg Zborovsky</title>
+    <link>/tags/algorithms/</link>
+    <description>Recent content in Algorithms on Greg Zborovsky</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 18 Oct 2021 12:00:00 -0400</lastBuildDate><atom:link href="/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linking With Linked Lists</title>
+      <link>/posts/linking-with-linked-lists/</link>
+      <pubDate>Mon, 18 Oct 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/posts/linking-with-linked-lists/</guid>
+      <description>Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Abstract Data structure courses often introduce linked lists as a basic data structure as an alternative to arrays. They supposedly have the advantage of constant time insertion and deletion at any point in the list as long as you have access to a pointer near the node you are inserting or deleting.</description>
+    </item>
+    
+    <item>
+      <title>Ode to Binary Search</title>
+      <link>/posts/ode-to-binary-search/</link>
+      <pubDate>Mon, 05 Apr 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/posts/ode-to-binary-search/</guid>
+      <description>Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Introduction Given a sorted array, we can &amp;ldquo;binary search&amp;rdquo; through an array to find a certain element by comparing the middle element to our current element and then deciding either that we have found what we are looking for, that what we are looking for is in the left half of the array, or that what we are looking for is in the right half of the array.</description>
+    </item>
+    
+  </channel>
+</rss>

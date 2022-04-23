@@ -1,0 +1,547 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Greg Zborovsky</title>
+        <link>/posts/</link>
+        <description>Recent content in Posts on Greg Zborovsky</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+        <lastBuildDate>Thu, 21 Apr 2022 19:03:22 +0000</lastBuildDate>
+        <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>My First Post and Expectations</title>
+            <link>/posts/my-first-post/</link>
+            <pubDate>Thu, 21 Apr 2022 19:03:22 +0000</pubDate>
+            
+            <guid>/posts/my-first-post/</guid>
+            <description>This post should give some ideas about what to expect from this website.
+ About The about page will contain information about myself, but may not reflect newest events or changes.
+ Blog I enjoy writing about technical topics, especially simple ones that grab my attention for maybe a week at a time. I am hoping to write up at least one post one per month.
+ Projects This will be an organized place to list some of my projects, both completed and in progress.</description>
+            <content type="html"><![CDATA[<p>This post should give some ideas about what to expect from this website.</p>
+<hr>
+<h3 id="about">About</h3>
+<p>The about page will contain information about myself, but may not reflect newest events or changes.</p>
+<hr>
+<h3 id="blog">Blog</h3>
+<p>I enjoy writing about technical topics, especially simple ones that grab my attention for maybe a week at a time. I am hoping to write up at least one post one per month.</p>
+<hr>
+<h3 id="projects">Projects</h3>
+<p>This will be an organized place to list some of my projects, both completed and in progress.</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Linking With Linked Lists</title>
+            <link>/posts/linking-with-linked-lists/</link>
+            <pubDate>Mon, 18 Oct 2021 12:00:00 -0400</pubDate>
+            
+            <guid>/posts/linking-with-linked-lists/</guid>
+            <description>Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Abstract Data structure courses often introduce linked lists as a basic data structure as an alternative to arrays. They supposedly have the advantage of constant time insertion and deletion at any point in the list as long as you have access to a pointer near the node you are inserting or deleting.</description>
+            <content type="html"><![CDATA[<p>Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.</p>
+<h3 id="abstract">Abstract</h3>
+<p>Data structure courses often introduce linked lists as a basic data structure as an alternative to arrays. They supposedly have the advantage of constant time insertion and deletion at any point in the list as long as you have access to a pointer near the node you are inserting or deleting. However, they suffer from cache and implementation issues that array-backed data structures tend to avoid.</p>
+<p>In this paper, I will</p>
+<ul>
+<li>Reintroduce linked lists and their implementations</li>
+<li>Reintroduce array-backed data structures and their implementations</li>
+<li>Discuss issues present with linked lists</li>
+<li>Discuss potential and practical applications of linked lists</li>
+</ul>
+<p><em>If there is anything you should take away from this paper, it is the content in section 4, &ldquo;Why it&rsquo;s Worse Than You Think&rdquo;</em></p>
+<h2 id="introduction">Introduction</h2>
+<p>Because this paper will focus primarily on speed differences between array-backed data structures and linked list-backed data structures, the majority of the material will be written with the intent of using a lower-level programming language like C++, although I will also mention Java performance.</p>
+<p>By far, the most popular array-backed data structure in C++ is std::vector, the closest alternative to Java&rsquo;s ArrayList. It is important to keep in mind that arrays are of a fixed size, so if you end up inserting an element when no slots are left, an \(O(n)\) operation must occur to relocate all of the elements to a larger array. Despite this &ldquo;worst case&rdquo; \(O(n)\) behavior, we can add to the end of a vector in \(O(1)\) amortized time, since it will still take \(O(n)\) time to insert \(n\) elements at the end. Note that in this implementation, it will always take \(O(n)\) time to insert an element at an arbitrary position, such as the beginning of the vector.</p>
+<p>C++&rsquo;s equivalent linked list implementation is std::list, which is the closest alternative to Java&rsquo;s LinkedList. Linked lists (assuming any kind, such as singly, doubly, circularly, etc) have the advantage of a true \(O(1)\) time insert operation near any node which we have a pointer to. In the default implementation, this means we can do a true \(O(1)\) insert to either side. Despite the true \(O(1)\) time insert operation, I will explore why linked lists often offer slower performance than array-backed data structures.</p>
+<h2 id="array-backed-data-structures">Array-Backed Data Structures</h2>
+<p>For the purpose of this paper, I would like to primarily use a C++ implementation of Java&rsquo;s ArrayDeque for argument about the efficiency of array-backed data structures. C++ has std::deque in the standard library, but uses a slightly more complex implementation which is unnecessary for this paper.
+The common operations of an ArrayDeque will have the time complexities listed below:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert at beginning</td>
+<td>\(O(1)\) amortized</td>
+</tr>
+<tr>
+<td>Remove from beginning</td>
+<td>\(O(1)\)</td>
+</tr>
+<tr>
+<td>Insert at end</td>
+<td>\(O(1)\) amortized</td>
+</tr>
+<tr>
+<td>Remove from end</td>
+<td>\(O(1)\)</td>
+</tr>
+<tr>
+<td>Insert at arbitrary index</td>
+<td>\(O(n)\)</td>
+</tr>
+<tr>
+<td>Remove from arbitrary index</td>
+<td>\(O(n)\)</td>
+</tr>
+<tr>
+<td>Access at arbitrary index</td>
+<td>\(O(1)\)</td>
+</tr>
+<tr>
+<td>Search for element</td>
+<td>\(O(n)\)</td>
+</tr>
+</tbody>
+</table>
+<p>Note that operations related to access, insertion, and deletion on either side are all \(O(1)\) or amortized \(O(1)\), making our ArrayDeque implementation efficient for the purposes of a deque (double ended queue). [A double ended queue may be used as both a stack and a queue.]</p>
+<p>Our ArrayDeque is implemented by maintaining an array of a certain size \(m\), the start index of elements, and the end index of elements. On inserting at the end of the data structure, we will place an element at the end index and increment end index by 1 and mod it by \(m\). For this reason, it may be preferable to constrain \(m\) to be a power of two such that the expensive mod operation can be replaced with a cheap bitmask. If end index is equal to start index, we will double the size of the containing array and copy over all elements. Similarly, when we place an element at the beginning, we will subtract 1 from the index and mod it by \(m\). If the new start index is equal to the end index, we will double the size of the containing array and copy over all elements. We will then place the element at the new start index. Similar to the usual analysis of std::vector and ArrayList, adding to either side will be \(O(1)\) amortized time because \(n\) operations will take \(O(n)\) time. [If we assume that we double the size of the backing array, then over \(n\) operations, there will be \(n\) inserted elements and roughly \(\log_{2}(n)\) array resizes. If the final array size is \(s\), then the total number of allocated array slots over all \(n\) operations would be at most \(2s\), which is still linear. This same analysis still applies if array size is multiplied by a value other than two as long as it is strictly greater than one, but note that the constants used in this analysis will be off. Big-O asymptotic complexities would remain the same.]</p>
+<p>To remove elements on either side, we can simply increment or decrement the start and end indices, both of which clearly take \(O(1)\) time.</p>
+<p>We can maintain \(O(1)\) time random access by index by returning the value at \((start+i) % m\) where \(i\) is the index we want to access, \(m\) is the current size of the array, and \(start\) is the start index. Asymptotically, this is equivalent to the time complexity for the same operation for an ArrayList or for an std::vector. If m is a power of 2, then performance in practice is very similar as well. Note that this operation is impossible to implement for linked list-backed data structures at this time complexity.</p>
+<h2 id="linked-list-backed-data-structures">Linked List-Backed Data Structures</h2>
+<p>There are several different implementations of linked lists, such as singly linked lists, doubly linked lists, circularly linked lists, XOR linked lists, and in-array linked lists, but I will primarily focus on doubly linked lists. C++ has its own std::list, but I will implement my own doubly linked list for simplicity.</p>
+<p>I will assume the reader knows how to implement a double linked list with a next and a prev pointer, but will specify the struct for a node:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">node</span> {
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">*</span> prev;
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">*</span> next;
+</span></span><span style="display:flex;"><span>    T data;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Note that <code>T data</code> is a value and not a pointer so as to not introduce another level of indirection. Interestingly enough, making the data member a value instead of a pointer (which isn&rsquo;t nearly as easy in some languages, such as Java) makes the benefits of the linked list much more like those of intrusive linked lists (although not the same). The common operations of a doubly linked list will have the time complexities listed below:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert at beginning</td>
+<td>\(O(1)\)</td>
+</tr>
+<tr>
+<td>Remove from beginning</td>
+<td>\(O(1)\)</td>
+</tr>
+<tr>
+<td>Insert at end</td>
+<td>\(O(1)\)</td>
+</tr>
+<tr>
+<td>Remove from end</td>
+<td>\(O(1)\)</td>
+</tr>
+<tr>
+<td>Insert at arbitrary index</td>
+<td>\(O(n)\)</td>
+</tr>
+<tr>
+<td>Insert a node &ldquo;near&rdquo; another</td>
+<td>\(O(1)\)</td>
+</tr>
+<tr>
+<td>Remove from arbitrary index</td>
+<td>\(O(n)\)</td>
+</tr>
+<tr>
+<td>Remove an arbitrary node</td>
+<td>\(O(1)\)</td>
+</tr>
+<tr>
+<td>Access at arbitrary index</td>
+<td>\(O(n)\)</td>
+</tr>
+<tr>
+<td>Search for element</td>
+<td>\(O(n)\)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="why-its-worse-than-you-think">Why it&rsquo;s Worse Than You Think</h2>
+<h3 id="in-theory">In Theory</h3>
+<p>Note that although a doubly linked list can remove a given node in \(O(1)\) time or insert a new value after or before a given node in \(O(1)\), finding the node to insert or delete from may take \(O(n)\) time in the first place. All other time complexities of linked list operations are either equal to or worse than those of the ArrayDeque (assuming that amortized \(O(1)\) is counted as equivalent to true \(O(1)\)). Even people like Bjarne Stroustrup have noted and presented on this supposed issue (<a href="https://www.youtube.com/watch?v=YQs6IC-vgmo">https://www.youtube.com/watch?v=YQs6IC-vgmo</a>).</p>
+<p>Given that ArrayDeques have the advantage of \(O(1)\) access of arbitrary indices and appear conceptually simpler, it&rsquo;s hard to find a reason to resort to using linked lists. Furthermore, ArrayDeques are backed by arrays, which means that all of the values of an ArrayDeque are all layed out compact and contiguously in memory. When adding to ArrayDeques, and especially when iterating through them, the CPU will find it much easier to load entire chunks of as much of the underlying array into cache at a time.</p>
+<p>On the other hand, the nodes of a linked list aren&rsquo;t guaranteed to be anywhere near each other in memory and will require extra overhead to maintain their <code>prev</code> and <code>next</code> pointers. The extra 16 bytes of memory usage (on an architecture with 8 byte addresses) and potentially random locations in memory will lead to more frequent cache misses, evictions, and less data will fit into the cache per load because the number of bytes used to represent the same amount of information increases, but cache size does not increase. Especially consider that for a containter with very small items, such as 32 bit integers, vectors will have a near-0 overhead for a large number of items, but linked lists will require around 200% more space. Since reads and writes to main memory are many times slower than to cache, programs should optimally try to be as memory and cache efficient as possible.</p>
+<p>Linked lists have yet another downside\textemdash frequent memory allocations. Typical linked list-backed data structures will allocate memory for each node, likely internally with something similar to a call to <code>malloc</code>. When calling <code>malloc</code>, the internal library may result to either a slow system call or to pulling a chunk of memory currently managed by <code>malloc</code>. Although the latter option is faster and therefore preferred, early allocations in a program will likely use the former option. Even when <code>malloc</code> takes the faster, latter path, in typical default implementations, it must still hop through a many lines of code, and if using multiple threads, a mutex as well.</p>
+<p>Although more efficient memory allocators exist, such as <code>tcmalloc</code> and <code>ptmalloc2</code>, the benefits of reducing the total calls to memory allocators is clear. Where adding \(O(n)\) elements to a linked list requires roughly \(O(n)\) memory allocations, adding \(O(n)\) elements to an ArrayDeque requires roughly \(O(\log{n})\) memory allocations (because memory allocations for an ArrayDeque are only done when its capacity is doubled).</p>
+<h3 id="in-practice">In Practice</h3>
+<h4 id="context">Context</h4>
+<p>The regular tests are run on collections of 4 byte integers, whereas the &ldquo;large&rdquo; version of the same test is run with a class whose only member is std::array&lt;int, 128&gt;, which means that the entire class will be roughly 512 bytes. It is likely important to note that these timing tests are single-threaded tests run on an i5-1135G7 running at 2.40 GHz on Windows through WSL and compiled with -O3 in g++.</p>
+<h4 id="results">Results</h4>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Array Deque</th>
+<th>Linked List</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>push_back</td>
+<td>0.102</td>
+<td>0.763</td>
+<td>7.5x</td>
+</tr>
+<tr>
+<td>push_front</td>
+<td>0.141</td>
+<td>0.736</td>
+<td>5.2x</td>
+</tr>
+<tr>
+<td>iterate</td>
+<td>0.011</td>
+<td>0.814</td>
+<td>74x</td>
+</tr>
+<tr>
+<td>push_back large</td>
+<td>0.15</td>
+<td>0.143</td>
+<td>0.95x</td>
+</tr>
+<tr>
+<td>push_front large</td>
+<td>0.132</td>
+<td>0.082</td>
+<td>0.62x</td>
+</tr>
+<tr>
+<td>iterate large</td>
+<td>0.012</td>
+<td>0.06</td>
+<td>5.0x</td>
+</tr>
+</tbody>
+</table>
+<h4 id="caution">Caution</h4>
+<p>Each timing is given in seconds, and the rightmost column is just the linked list column divided by the array deque column. The values in the table above are only rough numbers, but give a good sense of the expected performance given certain input data. For a small element size, each test was conducted 100 times with roughly 33 million elements inserted. For a large element size, each test was conducted 30 times with roughly 250,000 elements inserted.</p>
+<p>Note that for a small element size, the performance of the array deque totally crushes that of the linked list. For push_back and push_front, which is \(O(1)\) amortized for array deques and \(O(1)\) for linked lists, the array deque tends to be around 5 times faster. When it comes to iteration, the array deque is even better suited, and ends up more than 50 times faster than a linked list.</p>
+<p>For a larger element size, the overhead in the inherent structure of a linked list is small relative to the size of the element. Additionally, linked lists only need to store exactly as many nodes as elements have been added and do not need additional capacity. Thus, for a larger element size, a linked list of values <em>may</em> take less space than an array deque of values (Although this may be somewhat remedied by changing the array deque to store pointers to values rather than the values themselves). At large sizes, linked lists may use slightly less memory and for adding elements, may even be slightly faster. However, for iteration, linked lists still lag far behind array-backed data structures.</p>
+<p>While specific timings should not be used and may depend on other running processes, OS, CPU, compiler, and so on, the general trends are to be trusted.</p>
+<h3 id="additional-analysis">Additional Analysis</h3>
+<p>A common mistake is to assume that since iterating over \(n\) elements takes \(O(n)\) time for both a linked list and an array-backed data structure that their actual execution times in practice should also be similar. In practical tests, we find a massive disparity. In order to begin addressing this, we introduce the external-memory model. This model is often used to analyze how often IO operations are done to load chunks of data from a hard disk to CPU cache or RAM, but we can similarly use it to analyze loads of block from memory (RAM) to a much smaller cache.</p>
+<p>We assume that RAM is infinitely sized, but that the cache may contain \(M\) objects and blocks which contain \(B\) objects can be loaded. We assume that \(B &lt; M\) by a large margin. \(N\) is the number of objects.</p>
+<p>For iteration over an array, the number of cache load operations is \(O(\frac{N}{B})\) since contiguous elements can be loaded in a single load to cache. However, for a linked list, the number of cache load operations is \(O(N)\) since none of the nodes are guaranteed to be close to each other in memory, so each node access only necessarily loads itself into cache from RAM. Given that cache loads are a relatively expensive calculations, the division by \(B\) is an impactful performance improvement.</p>
+<p>This still doesn&rsquo;t illuminate the entire picture, but provides an initial avenue through which we can analyze the performance differences between linked lists and array-backed data structures more formally.</p>
+
+
+<div align="center" style="background-color: #FFFFFF">
+<img src="/img/linking-with-linked-lists/cpu_cache_block_model.svg" alt="CPU Cache Block Model">
+</div>
+
+<p>\section{Why it&rsquo;s Better Than You Think}</p>
+<p>Even despite all the listed downsides of linked lists, it can still importantly perform an operation that arrays cannot. Linked lists can insert or remove a node &ldquo;near&rdquo; a given node in \(O(1)\), so if we can somehow access a given node in faster than \(O(n)\) time, then we may end up with a situation where any array-backed data structure must be slower.</p>
+<p>One idea to accelerate access to any node is to add a lookup table, like a HashTable, where any inserted node is also added to the lookup table with an appropriate key. The restriction in this case is that each node must have a logical key associated with it that isn&rsquo;t an index (since we can&rsquo;t update the index efficiently once we place it into the lookup table). Of course, the worst-case lookup time for a HashTable is technically \(O(n)\), but for any decent hash function, we can expect \(O(1)\) time behavior on average. If stronger guaranteed bounds are absolutely necessary, we can resort to a tree-backed lookup table with \(O(log(n))\) lookup and insert times, which still beats \(O(n)\) time lookups. The advantage of augmenting a linked list with a lookup table is being able to access and modify any portion of your data {\em and} still maintain an order to it.</p>
+<p>Even despite the cache and memory benefits of array-backed containers, the \(O(1)\) performance with linked lists of the above use case very quickly beats that of the \(O(n)\) performance of arrays-backed data structures.</p>
+<p>There exists another previously unmentioned benefit of linked lists regarding memory as well. For a small data type like 32 bit integers, linked lists may use 200% more memory than vectors, but for a large datatype, linked lists will beat array-backed data structures in memory efficiency. Although linked lists require a minimum overhead of 16 bytes per element, they only allocate exactly as much memory as they need to store the list, but an array-backed container whose size occasionally doubles may need to allocate up to 2x more memory than it actually uses at a given time. When the size of each item is large, the memory overhead of array-backed containers dominates that of linked lists.</p>
+<h2 id="applications">Applications</h2>
+<h3 id="generalized-use-case">Generalized Use Case</h3>
+<p>As far as I understand, these conditions must hold for a linked list or linked list-like data structure to be required or very helpful to achieve optimal asymptotic time complexity:</p>
+<ol>
+<li>You need to insert, move, or delete nodes in the middle of a list.</li>
+<li>You require ordered (not sorted) data.</li>
+<li>The elements in your data must have some innate property such that you can access them in faster than \(O(n)\) time where n is the number of elements in the data.</li>
+<li>The problem must never require the data to be indexed.</li>
+</ol>
+<h3 id="lru-cache">LRU Cache</h3>
+<p>Frequently seen as an interview question, using the combination of a HashTable and a LinkedList is the most simple and efficient way to solve this problem.</p>
+<p>Design a data structure with a capacity \(c\) such that you can insert key-value pairs into this data structure and then query for the value of any given key. If the user inserts an item when the number of items in the data structure has already reached \(c\), then evict the element that was accessed the longest time ago. Ensure that all operations run in roughly \(O(1)\) time.</p>
+<p>With just a hash table, inserting when capacity is below \(c\) and querying will both run in roughly \(O(1)\) time, but the process of removing an element once the number of elements exceeds \(c\) will take roughly \(O(n)\) time to find which element hasn&rsquo;t been accessed in the longest time. With some tree-like data structure, this may be sped up to \(O(log(n))\), but not \(O(1)\).</p>
+<p>With just an array, inserting can be fully implemented in \(O(1)\), but querying will be stuck at \(O(n)\).</p>
+<p>We can combine the best traits of both worlds by augmenting a linked list with a lookup table as described in section 5. Every time we need to insert a key-value pair, we simply add the key-value pair to the end of the linked list and add a new entry to the table where the key is the given key and the value is a pointer to the newly added linked list node. If after this procedure the size of our data structure exceeds \(c\), we can simply remove the first element of the linked list and remove its associated key from the lookup table. To query, if the given key is not in the lookup table, then we do nothing. If it is indeed in the lookup table, then with the pointer to the node, we remove it in \(O(1)\) time and re-add it to the end of the list. This new structure supports both insertion and querying in roughly \(O(1)\) time and relies on both key-based lookups and having a particular order to the data.</p>
+<p>Note that all 4 conditions mentioned in section 6.1 are satisfied here. For the query operation, we delete nodes from the middle of a list. To know which element was accessed the longest ago, we need to maintain order. The innate property by which we can access each node is the key from each key-value pair. Finally, despite needing order, we never explicitly access any index.</p>
+
+
+<div align="center" style="background-color: #FFFFFF">
+<img src="/img/linking-with-linked-lists/hash_table_to_linked_list.svg" alt="Hash Table Pointing at Linked List Nodes">
+</div>
+
+<h3 id="malloc">malloc</h3>
+<p>Most implementations of malloc, such as linux&rsquo;s and the freeBSD&rsquo;s, will use some form of linked lists to store which chunks of memory are free. As noted in section 4, iteration over linked lists is extremely slow in practice, so all of these implementations refrain from performing any iteration over linked lists.</p>
+<p>The general idea is that each malloc implementation will keep an array of size \(n\), each with a pointer to the first node of a linked list. Each array index represents a different size to allocate. For example, the first index in the array may represent free memory blocks of size 16, the next index of 32, then of 64, etc. Thus, the allocator will be able to offer greater granularity in memory allocation than otherwise efficiently possible.</p>
+<p>When a caller wants to allocate memory of size \(s\), memory of size \(2^{k+4}\) will be allocated where \(k\) is the smallest integer such that \(2^{k+4} \geq s\). To allocate this memory, we will use \(k\) to index into the array of linked list pointers, we will return a pointer to the memory in only the first node of the linked list, and we will change the pointer at index \(k\) of the array to point to the next node. Since the array maintains a pointer to the first node and every node maintains a pointer to the next node, there is no significant iteration.</p>
+<p>Interestingly enough, when \(k\) is large enough, the memory allocated to store a node itself can be given directly to the caller requesting memory, so after a block of memory is allocated, there is nearly essentially no memory overhead for that block in the allocator.</p>
+<p>All of the above already assumes that malloc has already called something like <code>sbrk</code> to request memory from the operating system.</p>
+
+
+<div align="center" style="background-color: #FFFFFF">
+<img src="/img/linking-with-linked-lists/malloc_linked_list_structure.svg" alt="Typical Linked List Structure in Malloc">
+</div>
+
+<h3 id="dancing-links">Dancing Links</h3>
+<p>Dancing links (DLX) is a technique used to very simply insert or remove a node in \(O(1)\) into or from a circular doubly linked list. If there already exists a circular doubly linked list, we can remove a node from the list but still keep the node in memory with its previous and next pointers preserved in \(O(1)\) time. Since we preserve its previous and next pointers, it can be re-inserted into the same position in the list in \(O(1)\) time as well given that the nodes referred to by previous and next pointers are already in the list.</p>
+<p>Donald Knuth used this trick in designing Algorithm X, a recursive, backtracking algorithm used to solve exact cover problems. The exact cover problem is to select a subset of the rows of a binary matrix such that a `1&rsquo; appears exactly once in each column. As an example, a game like Sudoku can be converted to an equivalent exact cover problem.</p>
+<p>This paper won&rsquo;t cover how Algorithm X works, but an efficient implementation of it that makes use of DLX will store only the 1s of the binary matrix in a 2D linked list, so it will be efficient even for sparse matrices. In each step of the algorithm, certain rows and columns of the matrix can be removed very efficiently because of DLX. Similarly, when backtracking, removed rows and columns must be re-inserted into their previous position, which is again very efficient because of DLX.</p>
+<p><a href="https://en.wikipedia.org/wiki/Dancing_Links">https://en.wikipedia.org/wiki/Dancing_Links</a></p>
+<h3 id="competitive-programming">Competitive Programming</h3>
+<h4 id="lru-cache-1">LRU Cache</h4>
+<p>We have already previously analyzed the design of an efficient software-based LRU Cache, but it is also worth mentioning that designing an LRU Cache is a common interview and leetcode question.</p>
+<p><a href="https://leetcode.com/problems/lru-cache/">https://leetcode.com/problems/lru-cache/</a></p>
+<h4 id="advent-of-code">Advent of Code</h4>
+<p>Advent of Code is a set of 25 programming problems released each year from December 1st to 25th. Each problem tends to rely on some concepts from computer science and programming. Part 2 of problem 23 from 2020 is one such problem and happened to require some form of a linked list. Similar to the LRU cache problem, the final answer to the problem relies on the order of the collection, but intermediate steps require efficient access to insertion and deletion at arbitrary values (not indices). Again, by combining a lookup table with a linked list, an efficient solution may be written.</p>
+<p><a href="https://adventofcode.com/2020/day/23">https://adventofcode.com/2020/day/23</a></p>
+<h4 id="google-code-jam">Google Code Jam</h4>
+<p>One of the clever solutions to the problem &ldquo;Square Dance&rdquo; from Round 1A in Google Code Jam 2020 also conceptually relies on linked lists. There exists a grid of size \(R\times C\) where \(R\) is the number of rows and \(C\) is the number of columns. On each grid cell is one competitor with a certain score assigned to them. In every round until there are no more eliminations, compare the score of each competitor with the average of the scores of the closest 4 competitors to its left, right, top and bottom directions. For any competitor whose score is lower than the average around them, they are not included in the next round (they are eliminated). Naively, this solution will take roughly \(O(R^2C^2(R+C))\) because there may be up to \(O(RC)\) rounds, up to \(O(RC)\) competitors per round, and up to \(O(R+C)\) work to find the average  value of the 4 competitors to the left, right, top and bottom of a given competitor.</p>
+<p>The final solution to the question ends up at \(O(RC)\), but our primary interest lies in how to drop the factor of \(O(R+C)\) down to \(O(1)\). Rather than storing the grid as an array of arrays, we can choose store it as a 2D linked list where each node is a competitor and maintains pointers to the competitors directly above, below, to the left and the right of it. When eliminating competitors, lets say competitor \(a\), the down pointer of the node above \(a\) should put at the node below \(a\) and the up pointer of the node below \(a\) should put at the node above \(a\). A similar procedure occurs for the nodes to the left and right of \(a\). By following this procedure for each round, every node can find the average of the 4 nodes surrounding it in \(O(1)\) rather than searching out in the 4 directions to find the first non-eliminated competitor in \(O(R+C)\).</p>
+<p>Although the solution above is simple and relatively intuitive, it can also be simulated with just a regular 2D array where each grid cell would additionally need to store the distance to the next closest left, right, top, and bottom neighbors and never decrement any value. This approach should be \(O(1)\) amortized since every cell will perform at most \(O(R+C)\) updates to its left, right, top, and bottom neighbors over the entire course of \(O(RC)\) rounds. This alternative solution may require some additional analysis.</p>
+<p><a href="https://codingcompetitions.withgoogle.com/codejam/round/000000000019fd74/00000000002b1355#problem">Code Jam Problem Link</a></p>
+<h2 id="more-resources-and-extensions">More Resources and Extensions</h2>
+<h3 id="variations">Variations</h3>
+<h4 id="in-array-linked-lists">In-Array Linked Lists</h4>
+<p>Rather than directly allocating memory for each node, one alternative is store a vector or array-backed data structure of nodes. This offers a few potential advantages.</p>
+<p>When this type of list is first generated, assuming that each node is linked to the nodes in the next and previous indices, there is better cache performance since elements are guaranteed to be contiguous, although this only applies before nodes are moved around, added, and deleted. Additionally, since the nodes are in an array and not directly within memory, the <code>prev</code> and <code>next</code> pointers of each node can be replaced with integers representing the index of the previous and next node. For a list with few enough elements, an integer type smaller than 8 bytes may be selected, so this variation may also be slightly more memory efficient. Given how vectors and array deques tend to grow their memory, this also means that memory allocations will happen much more rarely than in a regular linked list.</p>
+<p>However, this method does have notable downsides. Given the index of a node, it is still easy to delete it in \(O(1)\) time and it is easy to insert a node &ldquo;after&rdquo; or &ldquo;before&rdquo; any other node in \(O(1)\). But, when deleting a node in the middle of an array, we cannot easily fill the hole that it leaves. Thus, the memory complexity of this variation is not \(O(n)\) where n is the number of elements in the list, but rather \(O(m)\) where m is the total number of calls to insert.</p>
+<h4 id="xor-linked-lists">XOR-Linked Lists</h4>
+<p>Another novel idea is to store only one pointer rather than two for a doubly linked list. This single pointer would represent the bitwise XOR (\(\oplus\)) of the <code>prev</code> pointer and the <code>next</code> pointer. The pointer held by the head of the linked list will just be the <code>next</code> pointer because \(0 \oplus a = a\). Similarly, the pointer held by the tail of the linked list will just be the <code>prev</code> pointer because \(a \oplus 0 = a\).</p>
+<p>The algorithm to iterate from head to tail may look like the following:</p>
+<pre tabindex="0"><code>head = pointer to head node of the linked list
+// every node contains two properties: an XOR&#39;d pointer and a value
+
+currNode = head
+prevPointer = 0
+
+while (currNode != null) {
+    // process currNode.value
+    nextPointer = prevPointer XOR currNode.pointer
+    prevPointer = address of currNode
+    currNode = nextPointer
+}
+</code></pre><p>This approach requires only storing one pointer per node instead of two for a doubly linked list, but requires greater logical complexity, is less well known, and is more difficult to augment with a faster lookup method.</p>
+<p><a href="https://en.wikipedia.org/wiki/XOR_linked_list">https://en.wikipedia.org/wiki/XOR_linked_list</a></p>
+<h4 id="unrolled-linked-list">Unrolled Linked List</h4>
+<p>One of the issues with the classic, naive linked list is the lack of efficiency with respect to cache, so one of the proposed solutions is to store an array of elements within each node instead of just a single element within each node.</p>
+<p>This approach is certainly more cache efficient for access of elements next to each other, but also increases logical complexity and makes adding/deleting nodes in the middle of a list slightly less efficient.</p>
+<p>This variation is actually quite common, just hidden as an implementation detail. For example, CPython&rsquo;s built-in deque implementation, as of 3.8.1, uses a linked list where every node holds an entire block or array of data.</p>
+
+
+<div align="center" style="background-color: #FFFFFF">
+<img src="/img/linking-with-linked-lists/unrolled_linked_list.svg" alt="Unrolled Linked List">
+</div>
+
+<h3 id="graphs">Graphs</h3>
+<p>Linked lists may be considered trivial graphs. Singly linked lists are directed graphs and doubly linked lists are undirected graphs. If a linked list is circular, then the graph will have a loop. Otherwise, it will be a tree. Since linked lists are essentially simple graphs, we can represent them with adjacency matrices and adjacency lists. Since they are very sparse graph, adjacency matrices will be very space inefficient, but adjacency lists will be nearly equivalent to the in-array variation of linked lists.</p>
+<p>Linked lists typically refer to 1D lists, although they can be extended to 2D just by adding <code>up</code> and <code>down</code> pointers as well. It is interesting to note that 2D linked list which is circular both vertically and horizontally is actually a torus. We can even continue increasing the number of dimensions, but in 3D and higher, it is simplest to visualize the &ldquo;linked list&rdquo; as a graph where we can cheaply insert or delete a node from any position in the graph.</p>
+<p>Normal binary and n-ary trees which have pointers to their children may be thought of as linked lists which branch off as they approach their tails. On the other hand, trees which maintain pointers to their parents may be thought of as linked lists which merge together as they approach their tails. In either case, any simple path in a tree or a graph may also be thought of as a linked list.</p>
+<h3 id="skip-lists">Skip Lists</h3>
+<p>For efficient search, insertion, and deletion balanced binary search trees like AVL and red-black trees are often the goto since they implement search, insertion, and delete each in \(O(log(n))\) time by maintaining a tree whose inorder traversal is sorted with a depth of \(O(log(n))\) where \(n\) is the number of elements in the collection.</p>
+<p>Skip lists are a data structure based on linked lists where the asymptotic time complexities for search, insertion, and deletion are all \(O(log(n))\) as well. However, their time and memory constants are typically higher than those of balanced binary search trees, so they are often ignored.</p>
+<p>The general idea for a skip list is to maintain \(O(log(n))\) layers of sorted linked lists. Without loss of generality, assume \(n=2^k\). The first layer of the skip list may only contain 1 node, the second layer may contain 2 nodes, the third layer 4 nodes, the the fourth layer 8 nodes, and so on, until it reaches \(n\) nodes.</p>
+<p>To give a basic idea of why this structure works, we can consider how the search method may work. To search for a value, we will start at the left-most node of the top layer and we will recursively step at most one node to right and exactly one layer down. We only step a node to the right iff the value of the node to the right is less than or equal to the value we are searching for. Thus, we will only take \(O(log(n))\) steps to find a value.</p>
+
+
+<div align="center" style="background-color: #FFFFFF">
+<img src="/img/linking-with-linked-lists/skip_list.svg" alt="Skip List">
+</div>
+
+<p><a href="https://en.wikipedia.org/wiki/Skip_list">https://en.wikipedia.org/wiki/Skip_list</a></p>
+<h3 id="closing-thoughts">Closing Thoughts</h3>
+<p>Despite the better performance of array-backed data structures, there is still something to be said about clean code and simplicity. Even with the existence of array deques, double ended queues tend to be visualized as linked lists. In functional programming, especially when manipulating just the head or tail of a list, it is easier to visualize something akin to a linked list rather than a &ldquo;view&rdquo; into an array if we care about achieving optimal or nearly optimal time complexity.</p>
+<p>On the note of simplicity, many geometric data structures have very natural representations in a linked list format. For example, the half-edge data structure, also known as a doubly connected edge list, stores information about the face this half of the edge is facing, the next half edge, the previous half edge, and the vertex at the end of edge. The structure of a half edge pointing to the next and previous half edges easily lends itself to a circular doubly linked list-like structure, but most efficient implementations of this data structure tend to avoid directly using linked lists and stick to a design where previous and next half edges are referred to by index. This design is more similar to the in-array variation of linked lists described in section 7.1.1.</p>
+<p>An interesting edge case of when array-backed data structures may be unfavorable compared to a linked list-backed data structure is when elements need to be added to the front or back of the container and worst case scenario per insertion is much more important than the average or amortized cost. In a system where real-time and immediate performance must be guaranteed, a linked list may actually be preferable, although I am not familiar with any such scenarios yet.</p>
+<p>Another case of where linked list-like structures may shine is in multi-threaded programs when adding or removing elements from a list. With a vector or array-backed data structure, the {\em entire} data structure must be locked because if a resize is necessary, then all of the memory in the data structure may need to be copied to a different location. On the other hand, in a linked list, only the node which is being inserted and the nodes between which the new node is being inserted need to be locked. Thus, in a linked-list implemented with multi-threading in mind, one thread should be able to read from the beginning of the list and another thread should be able to write to to the end of the list at the same exact time without issues. I believe the linked list approach likely improves performance, although I have not tested it. It is also worth investigating if linked list performance noticeably degrades in multi-threaded programs because of the mutex access during malloc.</p>
+<p>Linked lists seem to pop up fairly often in early CS education topics despite their fairly limited use in further education. I think part of the reason for this is to more easily introduce the idea of data connected by pointers or in some way &ldquo;linked&rdquo; such that the hop to more advanced data structures, like trees, is more natural.</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Ode to Binary Search</title>
+            <link>/posts/ode-to-binary-search/</link>
+            <pubDate>Mon, 05 Apr 2021 12:00:00 -0400</pubDate>
+            
+            <guid>/posts/ode-to-binary-search/</guid>
+            <description>Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Introduction Given a sorted array, we can &amp;ldquo;binary search&amp;rdquo; through an array to find a certain element by comparing the middle element to our current element and then deciding either that we have found what we are looking for, that what we are looking for is in the left half of the array, or that what we are looking for is in the right half of the array.</description>
+            <content type="html"><![CDATA[<p>Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Given a sorted array, we can &ldquo;binary search&rdquo; through an array to find a certain element by comparing the middle element to our current element and then deciding either that we have found what we are looking for, that what we are looking for is in the left half of the array, or that what we are looking for is in the right half of the array.</p>
+<p>Why should we care about this algorithm? Given a sorted list, searching for a certain element is many times faster with binary search than with linear search. Linear search has time complexity \(\mathcal{O}(n)\) whereas binary search has time complexity \(\mathcal{O}(\log{n})\) where \(n\) is the number of elements you are searching through.</p>
+<p>For reference (Each test was run 100 times, ex: it takes 1.73 seconds to search through 100,000,000 million items 100 times [This is <em>fast</em> - Java&rsquo;s optimizations make this way faster than it would be unoptimized. I tested without optimizations as well and it looks roughly 30x slower]):</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>Linear Search</th>
+<th>Binary Search</th>
+<th>Speed Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\(10^1\)</td>
+<td>0.000011</td>
+<td>0.000012</td>
+<td>0.95x</td>
+</tr>
+<tr>
+<td>\(10^2\)</td>
+<td>0.000088</td>
+<td>0.000037</td>
+<td>2.41x</td>
+</tr>
+<tr>
+<td>\(10^3\)</td>
+<td>0.000226</td>
+<td>0.000058</td>
+<td>3.88x</td>
+</tr>
+<tr>
+<td>\(10^4\)</td>
+<td>0.001670</td>
+<td>0.000021</td>
+<td>80.28x</td>
+</tr>
+<tr>
+<td>\(10^5\)</td>
+<td>0.002599</td>
+<td>0.000033</td>
+<td>78.03x</td>
+</tr>
+<tr>
+<td>\(10^6\)</td>
+<td>0.015747</td>
+<td>0.000039</td>
+<td>409.00x</td>
+</tr>
+<tr>
+<td>\(10^7\)</td>
+<td>0.196274</td>
+<td>0.000054</td>
+<td>3614.62x</td>
+</tr>
+<tr>
+<td>\(10^8\)</td>
+<td>1.738984</td>
+<td>0.000123</td>
+<td>14195.78x</td>
+</tr>
+</tbody>
+</table>
+<p>As sizes become larger and larger, binary search gains a greater and greater speed advantage, and a significant one at that.</p>
+<h2 id="implementation-details">Implementation Details</h2>
+<p>An example implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> list<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> low <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> high <span style="color:#f92672">=</span> list<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">&gt;=</span> low<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>low <span style="color:#f92672">+</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">&lt;</span> list<span style="color:#f92672">[</span>mid<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>            high <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">==</span> list<span style="color:#f92672">[</span>mid<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mid<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">-</span> low<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>This implementation is fairly common, but binary search can interestingly be done very similarly with recursion:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">binSearchRecursive</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> list<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> key<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> low<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">&gt;=</span> low<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>low <span style="color:#f92672">+</span> high<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">&lt;</span> list<span style="color:#f92672">[</span>mid<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> binSearchRecursive<span style="color:#f92672">(</span>list<span style="color:#f92672">,</span> key<span style="color:#f92672">,</span> low<span style="color:#f92672">,</span> mid<span style="color:#f92672">-</span>1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>key <span style="color:#f92672">==</span> list<span style="color:#f92672">[</span>mid<span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> mid<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> binSearchRecursive<span style="color:#f92672">(</span>list<span style="color:#f92672">,</span> key<span style="color:#f92672">,</span> mid<span style="color:#f92672">+</span>1<span style="color:#f92672">,</span> high<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">-</span> low<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>where low and high are 0 and list.length-1 respectively on the first call.</p>
+<p>Some things to be careful about in either implementation:</p>
+<ul>
+<li>\(\frac{low+high}{2}\) could cause an overflow if both low and high are close to their maximum datatype value. \(low + \frac{high-low}{2}\) is slightly safer, but will still cause issues when high is close to the maximum allowed value and low is close to the minimum allowed value. For reading on an overflow save implementation, refer to <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0811r3.html">http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0811r3.html</a></li>
+<li>If looking for a duplicate element, the current implementation will return the index of one of the duplicates, but not necessarily the first or the last index of a certain element. (The search can be adjusted to fulfill either goal.)</li>
+</ul>
+<h2 id="generalizations">Generalizations</h2>
+<h3 id="on-what-can-it-be-used">On What Can it be Used?</h3>
+<p>We know that we can binary search on any sorted array. More generally, we can binary search on any function which is monotonic within the range we want to search. In the example of binary search introduced in class, our sorted array is monotonically increasing and our function is \(f(x) = array[x]\).</p>
+<p>Note that this function does not need to be stored in memory, nor in an array. For example, we can binary search on \(f(x)=x^2\) in the domain \([0, n]\) where \(n \in \mathbb{N}\) by simply evaluating f(x) whenever we need its value.</p>
+<h3 id="where-should-it-be-used">Where Should it be Used?</h3>
+<p>So we can binary search on any monotonic function, but is binary search always the best option?</p>
+<p>No. The easiest case is to consider a LinkedList, like SML&rsquo;s default list, for which finding the value of \(f(x)\) is, on average, \(\mathcal{O}(n)\). If we we were to binary search for the index of a certain value in a LinkedList, it would take \(\mathcal{O}(n\log{n})\) as opposed to \(\mathcal{O}(n)\) for a regular linear search.</p>
+<p>Let \(r = \) random access time complexity for \(f(x)\). Binary search should be used when \(r\) is less than \(\mathcal{O}(\frac{m}{\log{n}})\) where \(n\) is the size of whatever you are searching over and \(m\) is the time needed to iterate over all \(n\) elements. The final time complexity for a binary search will be \(\mathcal{O}(r\cdot\log{n})\). In the case of an array where \(r=\mathcal{O}(1)\), the time complexity for binary search is clearly \(\mathcal{O}(\log{n})\).</p>
+<h3 id="extending-it-to-floating-point">Extending it to Floating Point</h3>
+<p>There is no restriction that binary search only functions on integers. With a small change to the implementation, binary search can be adjusted to work on floating point data.</p>
+<p>A binary search on monotonic floating point data will approach some exact value, but will terminate once \(high - low\) is less than some constant \(\epsilon\).</p>
+<p>The runtime analysis does not change much. We can consider \(\epsilon\) to be our unit size, thus our entire search will be over roughly \((high-low)\cdot\epsilon\) values, so the time complexity ends up as \(\mathcal{O}(\log{\epsilon(high-low)})=\mathcal{O}(\log{(high-low)}) + \log{\epsilon})\). If we treat \(\epsilon\) as a constant, the final runtime complexity remains as \(\mathcal{O}(\log{(high-low)})\).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">floatingPointBinarySearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">double</span> key<span style="color:#f92672">,</span> <span style="color:#66d9ef">double</span> lowVal<span style="color:#f92672">,</span> <span style="color:#66d9ef">double</span> highVal<span style="color:#f92672">,</span> <span style="color:#66d9ef">double</span> epsilon<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> low <span style="color:#f92672">=</span> lowVal<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> high <span style="color:#f92672">=</span> highVal<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">-</span> low <span style="color:#f92672">&gt;</span> epsilon<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> mid <span style="color:#f92672">=</span> low <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">-</span> low<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// f is some function which takes in a double and returns a double
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// it must be monotonic on [lowVal, highVal]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>f<span style="color:#f92672">(</span>mid<span style="color:#f92672">)</span> <span style="color:#f92672">&lt;</span> key<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            low <span style="color:#f92672">=</span> mid<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            high <span style="color:#f92672">=</span> mid<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> low <span style="color:#f92672">+</span> <span style="color:#f92672">(</span>high <span style="color:#f92672">-</span> low<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="without-an-end-value">Without an End Value</h3>
+<p>It turns out we don&rsquo;t always need a full range to binary search over for an answer. Having just one point is enough data to eventually use binary search.</p>
+<p>With a target value \(t\) and a given value \(f(x)\) evaluated at \(x\), there exist 3 cases.</p>
+<ol>
+<li>\(f(x) = t \implies \) you have the answer.</li>
+<li>\(f(x) &gt; t \implies \) we want to find a value \(f(y)\) which is \(&lt;\) t.</li>
+<li>\(f(x) &lt; t \implies \) we want to find a value \(f(y)\) which is \(&gt;\) t.</li>
+</ol>
+<p>Case 1 is trivial.</p>
+<p>Case 2 and 3 are essentially equivalent. I will cover case 2. The idea is to create a variable \(y\) equal to \(x\) and while(\(f(y) &gt; t\)), double the distance of \(y\) from \(x\). This does require \(f(y)\) to eventually cross \(t\) or the process will not terminate. Because the distance from \(y\) to \(x\) increases at an exponential rate, it will only be doubled a logarithmic number of times with respect to the size of the final search region. Overall complexity of the binary search including this step remains at \(\mathcal{O}(r\cdot\log{n})\) where \(r = \) random access time complexity for \(f(x)\).</p>
+<p>Case 3 is equivalent to Case 2 with the only difference being that you repeat while(\(f(y) &lt; t\)).</p>
+<p>Note: I have seen this concept used often where you aren&rsquo;t initially given too much information, but it does require monotonicity across the entire range that \(y\) expands across.</p>
+<h2 id="applications">Applications</h2>
+<p>I&rsquo;ll discuss some interesting binary search related problems here.</p>
+<h3 id="guessing-games">Guessing Games</h3>
+<p>You can ask me at most 20 questions. With no other information, what day and year is my birthday on?</p>
+<p>The oldest human is still younger than 130 years old, and every year has at most 366 days. Thus, my birthday must be on one of \(366\cdot130=47580\) days (between today and 47580 days ago). We cannot ask 47580 questions, so we must do something a bit more clever.</p>
+<p>You can consider this is as a binary search between [-47580, 0]. You can first ask whether I was born before or on \((47580+0)/2=23790\) days ago. If I say yes, then the binary search would continue within the range [-47580, -23790]. Otherwise, it would continue within the range [-23789, 0].</p>
+<p>Each step reduces the number of days we have to consider. In total, we will need exactly \(\lceil \log_{2}{47580} \rceil=16\) questions, which is actually less than 20.</p>
+<p>In this game our function is:</p>
+<p>\[f(x)=\begin{cases} 0 &amp; \text{if } x &lt;= birthday \\ 1 &amp; \text{if } x &gt; birthday \end{cases}\]</p>
+<p>Despite having many duplicate values, our function is indeed monotonically increasing. The target date, my birthday, would be the index of the final 0 in the sequence. It turns out this technique of having a monotonic function which only returns 0 and 1, or true and false, is fairly applicable to many competitive programming problems.</p>
+<h3 id="calculating-inverse-cdf">Calculating Inverse CDF</h3>
+<p>People taking AMS 310 right now (Survey of Probability and Statistics) are probably familiar with CDFs (Cumulative Distribution Functions). Let \(F(x)\( be a CDF and let \(f(x)\) be a PDF (Probability Distribution Function).</p>
+<p>Since
+\[F(x) = \sum_{n=0}^{x} f(x)\]
+and
+\[f(x) &gt;= 0, \forall x \in \mathbb{Q}, \]</p>
+<p>F(x) must be a monotonically increasing function, and thus we can binary search over it.</p>
+<p>To calculate \(F^{-1}(y)\), we can binary search over \(F(x)\) where \(x \in\) [min(domain of distribution), max(domain of distribution)] while searching for the value y. We can choose some arbitrary yet small enough \(\epsilon\) value such as \(\epsilon=10^{-6}\) and use \((low+high)/2\) as the final value of \(F^{-1}(y)\) at termination.</p>
+<h3 id="calculating-the-inverse-of-monotonic-functions">Calculating the Inverse of Monotonic Functions</h3>
+<p>I previously described how to calculate the values of the inverse CDF function, but binary search can be used to find the values of the inverse of any monotonic function by applying similar reasoning.</p>
+<p>One more common example of this is calculating the square root of a value. There is no obvious way to calculate a square root, but calculating the square of a value is trivial.</p>
+<p>To calculate \(sqrt(x)\), we can binary search over \(n \in [0, x]\) and calculate the value of \(n \cdot n\). If \(n\cdot n &gt; x\), we can replace the high value with the middle value. Otherwise, we can replace the low value with the middle value. Again, once \(high-low\) is less than some value \(\epsilon\), we can return \((low+high)/2\).</p>
+<p>In the case of sqrt(x), this method isn&rsquo;t worth it. On modern processors, calculating sqrt(x) is pretty fast, but more difficult operations or functions that aren&rsquo;t already implemented could benefit from this method.</p>
+<h3 id="finding-the-size-of-a-dartboard">Finding the Size of a Dartboard</h3>
+<p>This question actually comes from a Google Code Jam Competition, which is a competition for competitive programmers. You can think of it as a math team contest but for programmers.</p>
+<p><a href="https://codingcompetitions.withgoogle.com/codejam/round/000000000019fef2/00000000002d5b63#problem%7D">Code Jam Problem Link</a></p>
+<p>This problem doesn&rsquo;t require binary search, but using binary search makes the problem much simpler. The link I&rsquo;ve given has both the problem statement and the solution/analysis.</p>
+<p>This problem will require several different problem solving techniques and using binary search multiple times in different dimensions. This is a difficult problem, only recommended for people who are really interested in spending some time on solving a problem.</p>
+<h2 id="informal-ramblings">Informal Ramblings</h2>
+<p>A bit of a lighter section—some more of my own thoughts on binary searching as a concept.</p>
+<p>Even in real life, people tend to use binary search to solve small life problems. Looking through a dictionary? You&rsquo;re probably using binary search. Dictionaries are ordered alphabetically, so you&rsquo;re probably using some kind of binary search to flip through pages faster. Broke some code but you don&rsquo;t know where? It&rsquo;s pretty common for people to test the first half, then the first 3/4, then the first 7/8, etc of their code, just to find where a bug is; this is also a form of binary search. Interestingly enough, git supports this type of debugging through git bisect, which will binary search over a range of commits with the help of the user to find where a branch turns from good to bad.</p>
+<p>Another real life example, although hidden away, lives within switch statements. In the JVM, memory-efficient switches with a small ranges of indices will be often be implemented through an \(\mathcal{O}(1)\) call to a table, but if the switch cases are sparse, the JVM will switch to a form of binary search to find the matching case. More info here: <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-3.html#jvms-3.10">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-3.html#jvms-3.10</a></p>
+<h2 id="more-resources">More Resources</h2>
+<p>Some of the resources I&rsquo;ve used or seen:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">Binary Search on Wikipedia</a></li>
+<li><a href="https://www.youtube.com/watch?v=GU7DpgHINWQ">Binary Search Tutorial by Errichto</a></li>
+<li><a href="https://leetcode.com/explore/learn/card/binary-search/">Binary Search Concepts on Leetcode</a></li>
+<li><a href="https://codeforces.com/blog/entry/9901">Some people&rsquo;s implementations of Binary Search on Codeforces</a></li>
+</ul>
+]]></content>
+        </item>
+        
+    </channel>
+</rss>

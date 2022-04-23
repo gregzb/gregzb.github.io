@@ -6,7 +6,76 @@
     <description>Recent content on Greg Zborovsky</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Thu, 21 Apr 2022 19:03:22 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First Post and Expectations</title>
+      <link>/posts/my-first-post/</link>
+      <pubDate>Thu, 21 Apr 2022 19:03:22 +0000</pubDate>
+      
+      <guid>/posts/my-first-post/</guid>
+      <description>This post should give some ideas about what to expect from this website.
+ About The about page will contain information about myself, but may not reflect newest events or changes.
+ Blog I enjoy writing about technical topics, especially simple ones that grab my attention for maybe a week at a time. I am hoping to write up at least one post one per month.
+ Projects This will be an organized place to list some of my projects, both completed and in progress.</description>
+    </item>
+    
+    <item>
+      <title>Linking With Linked Lists</title>
+      <link>/posts/linking-with-linked-lists/</link>
+      <pubDate>Mon, 18 Oct 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/posts/linking-with-linked-lists/</guid>
+      <description>Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Abstract Data structure courses often introduce linked lists as a basic data structure as an alternative to arrays. They supposedly have the advantage of constant time insertion and deletion at any point in the list as long as you have access to a pointer near the node you are inserting or deleting.</description>
+    </item>
+    
+    <item>
+      <title>Efficient Barnes–Hut CUDA Simulation</title>
+      <link>/projects/nbody-simulation/</link>
+      <pubDate>Fri, 27 Aug 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/projects/nbody-simulation/</guid>
+      <description>More info coming soon!</description>
+    </item>
+    
+    <item>
+      <title>Ode to Binary Search</title>
+      <link>/posts/ode-to-binary-search/</link>
+      <pubDate>Mon, 05 Apr 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/posts/ode-to-binary-search/</guid>
+      <description>Note: This is a post originally written and posted to my GitHub which I have moved here as of 4/23/2022.
+Introduction Given a sorted array, we can &amp;ldquo;binary search&amp;rdquo; through an array to find a certain element by comparing the middle element to our current element and then deciding either that we have found what we are looking for, that what we are looking for is in the left half of the array, or that what we are looking for is in the right half of the array.</description>
+    </item>
+    
+    <item>
+      <title>Chess Engine</title>
+      <link>/projects/chess-engine/</link>
+      <pubDate>Wed, 25 Nov 2020 12:00:00 -0400</pubDate>
+      
+      <guid>/projects/chess-engine/</guid>
+      <description>More info coming soon!</description>
+    </item>
+    
+    <item>
+      <title>Software Graphics Engine</title>
+      <link>/projects/software-graphics-engine/</link>
+      <pubDate>Fri, 12 Jun 2020 12:00:00 -0400</pubDate>
+      
+      <guid>/projects/software-graphics-engine/</guid>
+      <description>More info coming soon!</description>
+    </item>
+    
+    <item>
+      <title>Simple Platformer</title>
+      <link>/projects/simple-platformer/</link>
+      <pubDate>Wed, 05 Jun 2019 12:00:00 -0400</pubDate>
+      
+      <guid>/projects/simple-platformer/</guid>
+      <description>More info coming soon!</description>
+    </item>
+    
     <item>
       <title>About Me</title>
       <link>/about/</link>

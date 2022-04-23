@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>non-technical on Greg Zborovsky</title>
+    <link>/tags/non-technical/</link>
+    <description>Recent content in non-technical on Greg Zborovsky</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Thu, 21 Apr 2022 19:03:22 +0000</lastBuildDate><atom:link href="/tags/non-technical/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First Post and Expectations</title>
+      <link>/posts/my-first-post/</link>
+      <pubDate>Thu, 21 Apr 2022 19:03:22 +0000</pubDate>
+      
+      <guid>/posts/my-first-post/</guid>
+      <description>This post should give some ideas about what to expect from this website.
+ About The about page will contain information about myself, but may not reflect newest events or changes.
+ Blog I enjoy writing about technical topics, especially simple ones that grab my attention for maybe a week at a time. I am hoping to write up at least one post one per month.
+ Projects This will be an organized place to list some of my projects, both completed and in progress.</description>
+    </item>
+    
+  </channel>
+</rss>

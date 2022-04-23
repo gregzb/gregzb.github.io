@@ -2,14 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/</loc>
+    <lastmod>2022-04-21T19:03:22+00:00</lastmod>
+  </url><url>
+    <loc>/posts/my-first-post/</loc>
+    <lastmod>2022-04-21T19:03:22+00:00</lastmod>
+  </url><url>
+    <loc>/tags/non-technical/</loc>
+    <lastmod>2022-04-21T19:03:22+00:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2022-04-21T19:03:22+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-21T19:03:22+00:00</lastmod>
+  </url><url>
+    <loc>/tags/algorithms/</loc>
+    <lastmod>2021-10-18T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/tags/data-structures/</loc>
+    <lastmod>2021-10-18T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/posts/linking-with-linked-lists/</loc>
+    <lastmod>2021-10-18T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/tags/technical/</loc>
+    <lastmod>2021-10-18T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/projects/nbody-simulation/</loc>
+    <lastmod>2021-08-27T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/projects/</loc>
+    <lastmod>2021-08-27T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/tags/untagged/</loc>
+    <lastmod>2021-08-27T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/posts/ode-to-binary-search/</loc>
+    <lastmod>2021-04-05T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/projects/chess-engine/</loc>
+    <lastmod>2020-11-25T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/projects/software-graphics-engine/</loc>
+    <lastmod>2020-06-12T12:00:00-04:00</lastmod>
+  </url><url>
+    <loc>/projects/simple-platformer/</loc>
+    <lastmod>2019-06-05T12:00:00-04:00</lastmod>
+  </url><url>
     <loc>/about/</loc>
   </url><url>
     <loc>/blog/</loc>
   </url><url>
-    <loc>/</loc>
-  </url><url>
     <loc>/series/</loc>
-  </url><url>
-    <loc>/tags/</loc>
   </url>
 </urlset>
