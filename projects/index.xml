@@ -6,8 +6,52 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Fri, 27 Aug 2021 12:00:00 -0400</lastBuildDate>
+        <lastBuildDate>Tue, 19 Apr 2022 12:00:00 -0400</lastBuildDate>
         <atom:link href="/projects/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>CSE320 Vague Homeworks - Group Problem Solving Project</title>
+            <link>/projects/problem-solving-project/</link>
+            <pubDate>Tue, 19 Apr 2022 12:00:00 -0400</pubDate>
+            
+            <guid>/projects/problem-solving-project/</guid>
+            <description>We noted that there are many local issues that students have the power to change. Working in a group with 3 other people, we noted that each of us were taking the same class, CSE320, systems fundamentals part 2. This class is one of the most difficult in Stony Brook University with hard material practical both in software engineering and in computer science theory. However, we found that roughly 95% of surveyed students found the homework documents difficult to understand and would have appreciated more information, clarification, and tips.</description>
+            <content type="html"><![CDATA[<p>We noted that there are many local issues that students have the power to change. Working in a group with 3 other people, we noted that each of us were taking the same class, CSE320, systems fundamentals part 2. This class is one of the most difficult in Stony Brook University with hard material practical both in software engineering and in computer science theory. However, we found that roughly 95% of surveyed students found the homework documents difficult to understand and would have appreciated more information, clarification, and tips. We chose to analyze this issue more depth and came up with a solution—a procedure to create a student-crowdsourced document for each homework containing student-written clarifications and tips without instigating concerns regarding academic honesty.</p>
+
+<iframe src="https://drive.google.com/file/d/1KjB9SD3-GEoYUiwcITKHw5rvyeECAS5M/preview" onload='javascript:(function(o){o.style.height=o.clientWidth * (11/8.5) +"px";}(this));' style="height:100%;width:100%;border:none;overflow:hidden;" allow="autoplay"></iframe>
+
+]]></content>
+        </item>
+        
+        <item>
+            <title>AI-Enabled Provably Resilient Networked Microgrids - Press Release</title>
+            <link>/projects/press-release/</link>
+            <pubDate>Sun, 27 Mar 2022 12:00:00 -0400</pubDate>
+            
+            <guid>/projects/press-release/</guid>
+            <description>This assignment had us choose a recent or future local event and write a press release on it. This assignment helped continue to develop the skill of concise, formal writing for other entities.
+ </description>
+            <content type="html"><![CDATA[<p>This assignment had us choose a recent or future local event and write a press release on it. This assignment helped continue to develop the skill of concise, formal writing for other entities.</p>
+
+<iframe src="https://drive.google.com/file/d/1N1kyikEIPB_V1VyKeV8CZryMu3jKBxRR/preview" onload='javascript:(function(o){o.style.height=o.clientWidth * (11/8.5) +"px";}(this));' style="height:100%;width:100%;border:none;overflow:hidden;" allow="autoplay"></iframe>
+
+]]></content>
+        </item>
+        
+        <item>
+            <title>How to Install Python - User Instructions</title>
+            <link>/projects/user-instructions/</link>
+            <pubDate>Sun, 06 Mar 2022 12:00:00 -0400</pubDate>
+            
+            <guid>/projects/user-instructions/</guid>
+            <description>This class project tested my ability to write technical instructions for the average user. Specifically, I wrote about how an average user could install Python on their Windows computer. In the workplace, this will smoothly translate to writing comprehensible and clean documentation for both code and products.
+ </description>
+            <content type="html"><![CDATA[<p>This class project tested my ability to write technical instructions for the average user. Specifically, I wrote about how an average user could install Python on their Windows computer. In the workplace, this will smoothly translate to writing comprehensible and clean documentation for both code and products.</p>
+
+<iframe src="https://drive.google.com/file/d/1LUs19i8JvGaKR9U83I_gVJykBTCCx5HA/preview" onload='javascript:(function(o){o.style.height=o.clientWidth * (11/8.5) +"px";}(this));' style="height:100%;width:100%;border:none;overflow:hidden;" allow="autoplay"></iframe>
+
+]]></content>
+        </item>
         
         <item>
             <title>Efficient Barnes–Hut CUDA Simulation</title>
@@ -15,8 +59,26 @@
             <pubDate>Fri, 27 Aug 2021 12:00:00 -0400</pubDate>
             
             <guid>/projects/nbody-simulation/</guid>
-            <description>More info coming soon!</description>
-            <content type="html"><![CDATA[<p>More info coming soon!</p>
+            <description>Intro An N-body simulation is a simulation of a system of n different particles or entities, typically simulating the force of gravity between them. From classic physics,
+\[F=G\frac{m_1m_2}{r^2}\]
+where F is force, G is the gravitational constant, \(m_1\) is the mass of object 1, \(m_2\) is the mass of object 2, and \(r\) is the distance between the centers of the two masses.
+By applying this equation for every pair of entities and accumulating the results, we can calculate the force on every entity at any given point in time.</description>
+            <content type="html"><![CDATA[<h2 id="intro">Intro</h2>
+<p>An N-body simulation is a simulation of a system of n different particles or entities, typically simulating the force of gravity between them. From classic physics,</p>
+<p>\[F=G\frac{m_1m_2}{r^2}\]</p>
+<p>where F is force, G is the gravitational constant, \(m_1\) is the mass of object 1, \(m_2\) is the mass of object 2, and \(r\) is the distance between the centers of  the two masses.</p>
+<p>By applying this equation for every pair of entities and accumulating the results, we can calculate the force on every entity at any given point in time. Thus, we can find the acceleration for every entity at the current time step in \(O(n^2)\). We cannot simulate time continuously as in real life, so we can choose a small timestep t, like t = 0.01s. Then, instead of adding the newly calculated acceleration (a) to every entity&rsquo;s current velocity (v), we add \(a\cdot t\) instead. Although this isn&rsquo;t perfect, it is often good enough. If we need more precision, we can set t to be smaller in exchange for the simulation taking more time.</p>
+
+<iframe src="https://drive.google.com/file/d/12CpTCEv4cjHZLV7jLq6Bo8agprJp2j6y/preview" onload='javascript:(function(o){o.style.height=o.clientWidth * (9/16) +"px";}(this));' style="height:100%;width:100%;border:none;overflow:hidden;" allow="autoplay"></iframe>
+
+<h2 id="barnes-hut">Barnes Hut</h2>
+<p>The approach described in the introduction is very simple and may be implemented in 20 or so lines of code, excluding the visualization. However, sitting at \(O(n^2)\), it quickly slows down when n grows large. We can approximate the exact algorithm with Barnes Hut, an algorithm with time complexity \(O(n\log n)\). In three dimensions, the idea is to split space into octants recursively until each leaf suboctant contains only one entity. Then, to calculate the acceleration on each entity, traverse down the generated 3D tree. For any close enough suboctant, fully recurse down that subtree as well, doing the usual naive calculations. However, for any suboctants which are far enough away from the entity currently being queried on, treat all of the entities within that suboctant as a single entity for the purpose of calculation.</p>
+<p>This approximation relies on the \(r^2\) in the denominator of the force calculation with the reasoning that the impact from far away entities will be smaller or less important than the impact from close-by entities.</p>
+<p>If implemented inefficiently, this approach may be only barely faster than the naive approach or even the same speed with worse accuracy, so care must be taken in ensuring that the algorithm and the data structures supporting the algorithm are as efficient as possible.</p>
+<h2 id="cuda">CUDA</h2>
+<p>Supporting the simulation of hundreds of thousands of entities at the same time is hard, especially in terms of performance. A normal computer processor, the CPU, is primarily geared towards single-threaded code—code that is run one line of code after another, very quickly. In the last 15 or so years, General-Purpose Graphics Processing Units (GPGPUs), have become more popular because of their ability to perform many small calculations in parallel. However, programming them requires a slightly different skillset compared to programming on classical CPUs, as many learn in college, so learning to utilize GPGPUs within their limits was a challenge for me.</p>
+<p>Parallelizing the naive \(O(n^2)\) algorithm on GPGPUs is not very difficult, but the challenge comes in combining the Barnes Hut approximation algorithm with CUDA programming. Somehow, we need to efficiently and in parallel construct the recursive tree of octants (octree) and then efficiently query this tree to calculate the acceleration for every node.</p>
+<p>As a side challenge, we should be able to visualize this efficiently in 3D space as well.</p>
 ]]></content>
         </item>
         
@@ -26,19 +88,51 @@
             <pubDate>Wed, 25 Nov 2020 12:00:00 -0400</pubDate>
             
             <guid>/projects/chess-engine/</guid>
-            <description>More info coming soon!</description>
-            <content type="html"><![CDATA[<p>More info coming soon!</p>
+            <description>I wrote my first chess engine, which you can find on my GitHub.
+I will be writing an updated version soon, but as a placeholder, I will note that writing a chess engine teaches you a treasure trove of information, especially if you are aiming to write a fast one. I will give a small preview of things I have learned and plan to learn:
+ I better learned to program in C++, specifically about minimizing my memory and performance footprints.</description>
+            <content type="html"><![CDATA[<p>I wrote my first chess engine, which you can find on my <a href="https://github.com/gregzb/GeckoEngine">GitHub</a>.</p>
+<p>I will be writing an updated version soon, but as a placeholder, I will note that writing a chess engine teaches you a treasure trove of information, especially if you are aiming to write a fast one. I will give a small preview of things I have learned and plan to learn:</p>
+<ul>
+<li>I better learned to program in C++, specifically about minimizing my memory and performance footprints.</li>
+<li>Bit manipulation is often introduced as an ancient technique with little use for modern programs. To maximize performance for a chess move generator, make using of bitwise representations of chessboards is crucial, often dropping memory usage by up to 1 or 2 orders of magnitude. The bitwise operations that are actually employed to achieve these speedups are also nontrivial and end up very interesting.
+<ul>
+<li>One approach to calculating moves is called the &ldquo;magic bitboards&rdquo; approach and further introduces you to generated certain bitwise values by making use of non-deterministically generated perfect hashes.</li>
+</ul>
+</li>
+<li>On the note of dropping memory usage, it should also teach you about cache and the fact that programs which don&rsquo;t use much memory can fit in cache, and therefore execute much faster.</li>
+<li>I generally learned about some language features which although are useful, may cause slowdowns in extremely high performance code.</li>
+<li>Disciplined programming is difficult to learn, so writing a chess engine serves as a good exercise because of the massive amount of edge cases which you may encounter.</li>
+<li>Modern chess engines tend to use basic neural networks to evaluate positions, so it serves as a small entry into the field of AI as well.</li>
+<li>Searching for the best move to be played at a given point in time is typically done using the minimax algorithm with alpha beta pruning based on the results of the neural network&rsquo;s evaluation of searched positions.</li>
+</ul>
 ]]></content>
         </item>
         
         <item>
-            <title>Software Graphics Engine</title>
-            <link>/projects/software-graphics-engine/</link>
-            <pubDate>Fri, 12 Jun 2020 12:00:00 -0400</pubDate>
+            <title>Set Cover as Fast as Possible</title>
+            <link>/projects/fast-minimum-set-cover/</link>
+            <pubDate>Wed, 04 Nov 2020 12:00:00 -0400</pubDate>
             
-            <guid>/projects/software-graphics-engine/</guid>
-            <description>More info coming soon!</description>
-            <content type="html"><![CDATA[<p>More info coming soon!</p>
+            <guid>/projects/fast-minimum-set-cover/</guid>
+            <description>Intro In the set cover problem, there exists a universe set U and a set S of subsets of U. The goal is to pick as few items of S as possible such that their union is equal to the set U.
+This version of the problem, where we are trying to find the minimum number of elements of S such that their union is equal to S, is NP-hard. In practice, this means that this problem cannot be solved exactly nor verified efficiently.</description>
+            <content type="html"><![CDATA[<h2 id="intro">Intro</h2>
+<p>In the set cover problem, there exists a universe set U and a set S of subsets of U. The goal is to pick as few items of S as possible such that their union is equal to the set U.</p>
+<p>This version of the problem, where we are trying to find the minimum number of elements of S such that their union is equal to S, is NP-hard. In practice, this means that this problem cannot be solved exactly nor verified efficiently. Thus, aside from approximations, the best we can do for this problem is write efficient solvers which prune off as many unnecessary calculations as possible.</p>
+<p>I wrote a solver which I will soon make public. (Waiting on permission from a professor)</p>
+<h2 id="naive-idea">Naive Idea</h2>
+<p>The most naive idea is to write a solver where you try every possible subset of S and find the smallest S whose union is U, but this will run with a worst case time complexity of roughly \(O(|U|\cdot 2^{|S|})\) depending on implementation. If |S| is large, meaning even just 40 or larger, this will take hours, days, or possibly even years to run.</p>
+<h2 id="optimizations">Optimizations</h2>
+<p>There are several interesting concepts to explore within this project.</p>
+<ul>
+<li>Constant time optimization
+<ul>
+<li>This is very much affected by choice of data structures and algorithms. To drop my overhead as much as possible, I represent sets of elements using bitsets since I can always compress them into a small range. This also allows me to do set operations efficiently using bitwise operations</li>
+</ul>
+</li>
+<li>We can reconsider this problem as search on an implicit tree where successfully reaching a leaf of the tree implies that we have found a solution. Then, the problem becomes about reducing the size of the tree as much as possible, and searching the rest that we could not reduce as fast as possible. The solution to the problem becomes the minimum value we find across all of the leaves of the tree.</li>
+</ul>
 ]]></content>
         </item>
         
@@ -48,8 +142,25 @@
             <pubDate>Wed, 05 Jun 2019 12:00:00 -0400</pubDate>
             
             <guid>/projects/simple-platformer/</guid>
-            <description>More info coming soon!</description>
-            <content type="html"><![CDATA[<p>More info coming soon!</p>
+            <description>Intro Back in high school, for an AP CS final project, I decided to make a platformer where you can tell the character to jump by yelling. As a learning experience, I chose to write it in Processing, a piece of software that advertises itself as &amp;ldquo;a flexible software sketchbook&amp;rdquo; and separate language, but is actually a library for Java which makes it very easy to work with graphics, audio, and user input.</description>
+            <content type="html"><![CDATA[<h3 id="intro">Intro</h3>
+<p>Back in high school, for an AP CS final project, I decided to make a platformer where you can tell the character to jump by yelling. As a learning experience, I chose to write it in Processing, a piece of software that advertises itself as &ldquo;a flexible software sketchbook&rdquo; and separate language, but is actually a library for Java which makes it very easy to work with graphics, audio, and user input.</p>
+<p>Access the project source code on <a href="https://github.com/gregzb/MKS22X-ScreamingGame">GitHub</a>.</p>
+<h3 id="image">Image</h3>
+
+    <img src="https://raw.githubusercontent.com/gregzb/MKS22X-ScreamingGame/master/urlandoScreenshot.png"  class="left"  />
+
+
+<h3 id="thought-processes-and-development">Thought Processes and Development</h3>
+<p>As a base, before we can tie yelling to the jump features, we must first make a platformer with basic sprites, physics, and user interaction. To handle sprites, I wrote an <em>Animation</em> class which every <em>CollidableObject</em> owns. Each <em>CollidableObject</em>, like the main player, has a set of animations like idling, running, and jumping, so the game feels more alive than with a static moving image. The animation class handles cycling through images at the current pace to maintain the illusion of animation.</p>
+<p><em>CollidableObject</em>s represent entities within the game that the main character can interact with, such as the platforms the main character jumps up. These objects interface with logic for both collision detection (meaning we can check if the main character is standing on a box or running into a box) and physics (so the player can move around in a natural-feeling way). Both physics and AABB collision detection logic were implemented manually.</p>
+<p>We may want different difficulties for the user to choose from, so there exists a main menu with several buttons to select a game difficulty to play on. These buttons were also manually implemented by reusing 2D collision detection logic and cleverly coloring the buttons to make them look convincing.</p>
+<p>There are other details to cover in terms of Object-Oriented programming practices and game loop internal details, but the majority of these are relatively standard implementation details. Not so standard is the way I worked with audio input. Although Processing offers a way to get access to audio input, directly extracting amplitude is not so simple considering the presence of noise. I had extra pre-processing in an attempt to smooth out the gathered audio data, but was able to make it work best with very short, high pitch noises like claps.</p>
+<h3 id="future-work">Future Work</h3>
+<ul>
+<li>The physics and collision detection logic specifically avoid sloped surfaces. I would like to eventually re-develop both to support sloped surfaces with a variety of possible reactions, like allowing the character to slide down the slope or allowing friction to keep the character in place. I may look more into raycasted collision detection, collision detection using the separating axis theorem, and keeping accuracy high in numerical physics calculations.</li>
+<li>The audio processing could be improved, possibly with a better understanding of Fourier Transforms and how audio is generally processed by computers.</li>
+</ul>
 ]]></content>
         </item>
         

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Intro In the set cover problem, there exists a universe set U and a set S of subsets of U. The goal is to pick as few items of S as possible such that their union is equal to the set U.
+This version of the problem, where we are trying to find the minimum number of elements of S such that their union is equal to S, is NP-hard. In practice, this means that this problem cannot be solved exactly nor verified efficiently." />
+<meta name="keywords" content=", Bit Manipulation, Brute Force, Pruning, Technical, Algorithms, Data Structures" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="/projects/fast-minimum-set-cover/" />
+
+
+    <title>
+        
+            Set Cover as Fast as Possible :: Greg Zborovsky  — Technical Blog
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.4e5c639214707eff609bb55fe49e183dee42258a73bc90e4cc7b0a84f900798a.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Set Cover as Fast as Possible">
+<meta itemprop="description" content="Intro In the set cover problem, there exists a universe set U and a set S of subsets of U. The goal is to pick as few items of S as possible such that their union is equal to the set U.
+This version of the problem, where we are trying to find the minimum number of elements of S such that their union is equal to S, is NP-hard. In practice, this means that this problem cannot be solved exactly nor verified efficiently."><meta itemprop="datePublished" content="2020-11-04T12:00:00-04:00" />
+<meta itemprop="dateModified" content="2020-11-04T12:00:00-04:00" />
+<meta itemprop="wordCount" content="327"><meta itemprop="image" content=""/>
+<meta itemprop="keywords" content="Bit Manipulation,Brute Force,Pruning,Technical,Algorithms,Data Structures," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content=""/>
+
+<meta name="twitter:title" content="Set Cover as Fast as Possible"/>
+<meta name="twitter:description" content="Intro In the set cover problem, there exists a universe set U and a set S of subsets of U. The goal is to pick as few items of S as possible such that their union is equal to the set U.
+This version of the problem, where we are trying to find the minimum number of elements of S such that their union is equal to S, is NP-hard. In practice, this means that this problem cannot be solved exactly nor verified efficiently."/>
+
+
+
+
+    <meta property="og:title" content="Set Cover as Fast as Possible" />
+<meta property="og:description" content="Intro In the set cover problem, there exists a universe set U and a set S of subsets of U. The goal is to pick as few items of S as possible such that their union is equal to the set U.
+This version of the problem, where we are trying to find the minimum number of elements of S such that their union is equal to S, is NP-hard. In practice, this means that this problem cannot be solved exactly nor verified efficiently." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/projects/fast-minimum-set-cover/" /><meta property="og:image" content=""/><meta property="article:section" content="projects" />
+<meta property="article:published_time" content="2020-11-04T12:00:00-04:00" />
+<meta property="article:modified_time" content="2020-11-04T12:00:00-04:00" /><meta property="og:site_name" content="Greg Zborovsky" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-11-04 12:00:00 -0400 -0400" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">greg</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/posts">Blog</a></li><li><a href="/projects">Projects</a></li><li><a href="/resume">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+                <span class="theme-toggle not-selectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+ </svg></span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        2 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="/projects/fast-minimum-set-cover/">Set Cover as Fast as Possible</a>
+      </h1>
+
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <h2 id="intro">Intro</h2>
+<p>In the set cover problem, there exists a universe set U and a set S of subsets of U. The goal is to pick as few items of S as possible such that their union is equal to the set U.</p>
+<p>This version of the problem, where we are trying to find the minimum number of elements of S such that their union is equal to S, is NP-hard. In practice, this means that this problem cannot be solved exactly nor verified efficiently. Thus, aside from approximations, the best we can do for this problem is write efficient solvers which prune off as many unnecessary calculations as possible.</p>
+<p>I wrote a solver which I will soon make public. (Waiting on permission from a professor)</p>
+<h2 id="naive-idea">Naive Idea</h2>
+<p>The most naive idea is to write a solver where you try every possible subset of S and find the smallest S whose union is U, but this will run with a worst case time complexity of roughly \(O(|U|\cdot 2^{|S|})\) depending on implementation. If |S| is large, meaning even just 40 or larger, this will take hours, days, or possibly even years to run.</p>
+<h2 id="optimizations">Optimizations</h2>
+<p>There are several interesting concepts to explore within this project.</p>
+<ul>
+<li>Constant time optimization
+<ul>
+<li>This is very much affected by choice of data structures and algorithms. To drop my overhead as much as possible, I represent sets of elements using bitsets since I can always compress them into a small range. This also allows me to do set operations efficiently using bitwise operations</li>
+</ul>
+</li>
+<li>We can reconsider this problem as search on an implicit tree where successfully reaching a leaf of the tree implies that we have found a solution. Then, the problem becomes about reducing the size of the tree as much as possible, and searching the rest that we could not reduce as fast as possible. The solution to the problem becomes the minimum value we find across all of the leaves of the tree.</li>
+</ul>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="tags/bit-manipulation/">Bit Manipulation</a></span>
+        <span class="tag"><a href="tags/brute-force/">Brute Force</a></span>
+        <span class="tag"><a href="tags/pruning/">Pruning</a></span>
+        <span class="tag"><a href="tags/technical/">Technical</a></span>
+        <span class="tag"><a href="tags/algorithms/">Algorithms</a></span>
+        <span class="tag"><a href="tags/data-structures/">Data Structures</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        327 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2020-11-04 11:00
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        
+        <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+        </div>
+        
+
+        <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="/projects/chess-engine/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">Chess Engine</span>
+                </a>
+            </span>
+            
+
+            
+            <span class="button next">
+                <a href="/projects/simple-platformer/">
+                    <span class="button__text">Simple Platformer</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.a2c5b062c87998f04d1b5dfb6a89a1b2d79786c21d0cb63a05e8a2082984b64b77d80955e3b97eab17273775162ba372511b711fea2f7608f216e68a67bb22d6.js" integrity="sha512-osWwYsh5mPBNG137aomhsteXhsIdDLY6BeiiCCmEtkt32AlV47l&#43;qxcnN3UWK6NyURtxH&#43;ovdgjyFuaKZ7si1g=="></script>
+
+
+
+    </body>
+</html>

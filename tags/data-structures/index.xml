@@ -18,5 +18,38 @@
 Abstract Data structure courses often introduce linked lists as a basic data structure as an alternative to arrays. They supposedly have the advantage of constant time insertion and deletion at any point in the list as long as you have access to a pointer near the node you are inserting or deleting.</description>
     </item>
     
+    <item>
+      <title>Efficient Barnes–Hut CUDA Simulation</title>
+      <link>/projects/nbody-simulation/</link>
+      <pubDate>Fri, 27 Aug 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/projects/nbody-simulation/</guid>
+      <description>Intro An N-body simulation is a simulation of a system of n different particles or entities, typically simulating the force of gravity between them. From classic physics,
+\[F=G\frac{m_1m_2}{r^2}\]
+where F is force, G is the gravitational constant, \(m_1\) is the mass of object 1, \(m_2\) is the mass of object 2, and \(r\) is the distance between the centers of the two masses.
+By applying this equation for every pair of entities and accumulating the results, we can calculate the force on every entity at any given point in time.</description>
+    </item>
+    
+    <item>
+      <title>Chess Engine</title>
+      <link>/projects/chess-engine/</link>
+      <pubDate>Wed, 25 Nov 2020 12:00:00 -0400</pubDate>
+      
+      <guid>/projects/chess-engine/</guid>
+      <description>I wrote my first chess engine, which you can find on my GitHub.
+I will be writing an updated version soon, but as a placeholder, I will note that writing a chess engine teaches you a treasure trove of information, especially if you are aiming to write a fast one. I will give a small preview of things I have learned and plan to learn:
+ I better learned to program in C++, specifically about minimizing my memory and performance footprints.</description>
+    </item>
+    
+    <item>
+      <title>Set Cover as Fast as Possible</title>
+      <link>/projects/fast-minimum-set-cover/</link>
+      <pubDate>Wed, 04 Nov 2020 12:00:00 -0400</pubDate>
+      
+      <guid>/projects/fast-minimum-set-cover/</guid>
+      <description>Intro In the set cover problem, there exists a universe set U and a set S of subsets of U. The goal is to pick as few items of S as possible such that their union is equal to the set U.
+This version of the problem, where we are trying to find the minimum number of elements of S such that their union is equal to S, is NP-hard. In practice, this means that this problem cannot be solved exactly nor verified efficiently.</description>
+    </item>
+    
   </channel>
 </rss>

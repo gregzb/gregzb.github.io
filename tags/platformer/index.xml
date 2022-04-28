@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Platformer on Greg Zborovsky</title>
+    <link>/tags/platformer/</link>
+    <description>Recent content in Platformer on Greg Zborovsky</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 05 Jun 2019 12:00:00 -0400</lastBuildDate><atom:link href="/tags/platformer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simple Platformer</title>
+      <link>/projects/simple-platformer/</link>
+      <pubDate>Wed, 05 Jun 2019 12:00:00 -0400</pubDate>
+      
+      <guid>/projects/simple-platformer/</guid>
+      <description>Intro Back in high school, for an AP CS final project, I decided to make a platformer where you can tell the character to jump by yelling. As a learning experience, I chose to write it in Processing, a piece of software that advertises itself as &amp;ldquo;a flexible software sketchbook&amp;rdquo; and separate language, but is actually a library for Java which makes it very easy to work with graphics, audio, and user input.</description>
+    </item>
+    
+  </channel>
+</rss>

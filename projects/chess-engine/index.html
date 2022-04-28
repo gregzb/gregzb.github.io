@@ -5,8 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="">
-<meta name="description" content="More info coming soon!" />
-<meta name="keywords" content=", untagged" />
+<meta name="description" content="I wrote my first chess engine, which you can find on my GitHub.
+I will be writing an updated version soon, but as a placeholder, I will note that writing a chess engine teaches you a treasure trove of information, especially if you are aiming to write a fast one. I will give a small preview of things I have learned and plan to learn:
+ I better learned to program in C&#43;&#43;, specifically about minimizing my memory and performance footprints." />
+<meta name="keywords" content=", Bit Manipulation, Chess, Technical, Algorithms, Data Structures" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
 <link rel="canonical" href="/projects/chess-engine/" />
@@ -39,21 +41,27 @@
 
 
 <meta itemprop="name" content="Chess Engine">
-<meta itemprop="description" content="More info coming soon!"><meta itemprop="datePublished" content="2020-11-25T12:00:00-04:00" />
+<meta itemprop="description" content="I wrote my first chess engine, which you can find on my GitHub.
+I will be writing an updated version soon, but as a placeholder, I will note that writing a chess engine teaches you a treasure trove of information, especially if you are aiming to write a fast one. I will give a small preview of things I have learned and plan to learn:
+ I better learned to program in C&#43;&#43;, specifically about minimizing my memory and performance footprints."><meta itemprop="datePublished" content="2020-11-25T12:00:00-04:00" />
 <meta itemprop="dateModified" content="2020-11-25T12:00:00-04:00" />
-<meta itemprop="wordCount" content="4"><meta itemprop="image" content=""/>
-<meta itemprop="keywords" content="untagged," />
+<meta itemprop="wordCount" content="315"><meta itemprop="image" content=""/>
+<meta itemprop="keywords" content="Bit Manipulation,Chess,Technical,Algorithms,Data Structures," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content=""/>
 
 <meta name="twitter:title" content="Chess Engine"/>
-<meta name="twitter:description" content="More info coming soon!"/>
+<meta name="twitter:description" content="I wrote my first chess engine, which you can find on my GitHub.
+I will be writing an updated version soon, but as a placeholder, I will note that writing a chess engine teaches you a treasure trove of information, especially if you are aiming to write a fast one. I will give a small preview of things I have learned and plan to learn:
+ I better learned to program in C&#43;&#43;, specifically about minimizing my memory and performance footprints."/>
 
 
 
 
     <meta property="og:title" content="Chess Engine" />
-<meta property="og:description" content="More info coming soon!" />
+<meta property="og:description" content="I wrote my first chess engine, which you can find on my GitHub.
+I will be writing an updated version soon, but as a placeholder, I will note that writing a chess engine teaches you a treasure trove of information, especially if you are aiming to write a fast one. I will give a small preview of things I have learned and plan to learn:
+ I better learned to program in C&#43;&#43;, specifically about minimizing my memory and performance footprints." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/projects/chess-engine/" /><meta property="og:image" content=""/><meta property="article:section" content="projects" />
 <meta property="article:published_time" content="2020-11-25T12:00:00-04:00" />
@@ -104,7 +112,7 @@
         <span class="header__right">
             
                 <nav class="menu">
-    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/posts">Blog</a></li><li><a href="/projects">Projects</a></li>
+    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/posts">Blog</a></li><li><a href="/projects">Projects</a></li><li><a href="/resume">Resume</a></li>
     </ul>
 </nav>
 
@@ -135,7 +143,7 @@
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        One minute
+        2 minutes
 
         
       </p>
@@ -153,7 +161,21 @@
       
 
       <div class="post-content">
-        <p>More info coming soon!</p>
+        <p>I wrote my first chess engine, which you can find on my <a href="https://github.com/gregzb/GeckoEngine">GitHub</a>.</p>
+<p>I will be writing an updated version soon, but as a placeholder, I will note that writing a chess engine teaches you a treasure trove of information, especially if you are aiming to write a fast one. I will give a small preview of things I have learned and plan to learn:</p>
+<ul>
+<li>I better learned to program in C++, specifically about minimizing my memory and performance footprints.</li>
+<li>Bit manipulation is often introduced as an ancient technique with little use for modern programs. To maximize performance for a chess move generator, make using of bitwise representations of chessboards is crucial, often dropping memory usage by up to 1 or 2 orders of magnitude. The bitwise operations that are actually employed to achieve these speedups are also nontrivial and end up very interesting.
+<ul>
+<li>One approach to calculating moves is called the &ldquo;magic bitboards&rdquo; approach and further introduces you to generated certain bitwise values by making use of non-deterministically generated perfect hashes.</li>
+</ul>
+</li>
+<li>On the note of dropping memory usage, it should also teach you about cache and the fact that programs which don&rsquo;t use much memory can fit in cache, and therefore execute much faster.</li>
+<li>I generally learned about some language features which although are useful, may cause slowdowns in extremely high performance code.</li>
+<li>Disciplined programming is difficult to learn, so writing a chess engine serves as a good exercise because of the massive amount of edge cases which you may encounter.</li>
+<li>Modern chess engines tend to use basic neural networks to evaluate positions, so it serves as a small entry into the field of AI as well.</li>
+<li>Searching for the best move to be played at a given point in time is typically done using the minimax algorithm with alpha beta pruning based on the results of the neural network&rsquo;s evaluation of searched positions.</li>
+</ul>
 
       </div>
     </article>
@@ -165,7 +187,11 @@
     <p>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
 
-        <span class="tag"><a href="tags/untagged/">untagged</a></span>
+        <span class="tag"><a href="tags/bit-manipulation/">Bit Manipulation</a></span>
+        <span class="tag"><a href="tags/chess/">Chess</a></span>
+        <span class="tag"><a href="tags/technical/">Technical</a></span>
+        <span class="tag"><a href="tags/algorithms/">Algorithms</a></span>
+        <span class="tag"><a href="tags/data-structures/">Data Structures</a></span>
         
     </p>
 
@@ -179,7 +205,7 @@
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        4 Words
+        315 Words
       </p>
 
       <p>
@@ -220,8 +246,8 @@
 
             
             <span class="button next">
-                <a href="/projects/software-graphics-engine/">
-                    <span class="button__text">Software Graphics Engine</span>
+                <a href="/projects/fast-minimum-set-cover/">
+                    <span class="button__text">Set Cover as Fast as Possible</span>
                     <span class="button__icon">→</span>
                 </a>
             </span>

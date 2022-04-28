@@ -18,6 +18,15 @@
     </item>
     
     <item>
+      <title>Class Project</title>
+      <link>/tags/class-project/</link>
+      <pubDate>Tue, 19 Apr 2022 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/class-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Algorithms</title>
       <link>/tags/algorithms/</link>
       <pubDate>Mon, 18 Oct 2021 12:00:00 -0400</pubDate>
@@ -45,11 +54,101 @@
     </item>
     
     <item>
-      <title>untagged</title>
-      <link>/tags/untagged/</link>
+      <title>Approximation</title>
+      <link>/tags/approximation/</link>
       <pubDate>Fri, 27 Aug 2021 12:00:00 -0400</pubDate>
       
-      <guid>/tags/untagged/</guid>
+      <guid>/tags/approximation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CUDA</title>
+      <link>/tags/cuda/</link>
+      <pubDate>Fri, 27 Aug 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/cuda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GPU</title>
+      <link>/tags/gpu/</link>
+      <pubDate>Fri, 27 Aug 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/gpu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Physics</title>
+      <link>/tags/physics/</link>
+      <pubDate>Fri, 27 Aug 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/physics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bit Manipulation</title>
+      <link>/tags/bit-manipulation/</link>
+      <pubDate>Wed, 25 Nov 2020 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/bit-manipulation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Chess</title>
+      <link>/tags/chess/</link>
+      <pubDate>Wed, 25 Nov 2020 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/chess/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Brute Force</title>
+      <link>/tags/brute-force/</link>
+      <pubDate>Wed, 04 Nov 2020 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/brute-force/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pruning</title>
+      <link>/tags/pruning/</link>
+      <pubDate>Wed, 04 Nov 2020 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/pruning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Game</title>
+      <link>/tags/game/</link>
+      <pubDate>Wed, 05 Jun 2019 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/game/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Platformer</title>
+      <link>/tags/platformer/</link>
+      <pubDate>Wed, 05 Jun 2019 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/platformer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Processing</title>
+      <link>/tags/processing/</link>
+      <pubDate>Wed, 05 Jun 2019 12:00:00 -0400</pubDate>
+      
+      <guid>/tags/processing/</guid>
       <description></description>
     </item>
     

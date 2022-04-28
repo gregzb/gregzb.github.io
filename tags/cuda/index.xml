@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CUDA on Greg Zborovsky</title>
+    <link>/tags/cuda/</link>
+    <description>Recent content in CUDA on Greg Zborovsky</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 27 Aug 2021 12:00:00 -0400</lastBuildDate><atom:link href="/tags/cuda/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Efficient Barnes–Hut CUDA Simulation</title>
+      <link>/projects/nbody-simulation/</link>
+      <pubDate>Fri, 27 Aug 2021 12:00:00 -0400</pubDate>
+      
+      <guid>/projects/nbody-simulation/</guid>
+      <description>Intro An N-body simulation is a simulation of a system of n different particles or entities, typically simulating the force of gravity between them. From classic physics,
+\[F=G\frac{m_1m_2}{r^2}\]
+where F is force, G is the gravitational constant, \(m_1\) is the mass of object 1, \(m_2\) is the mass of object 2, and \(r\) is the distance between the centers of the two masses.
+By applying this equation for every pair of entities and accumulating the results, we can calculate the force on every entity at any given point in time.</description>
+    </item>
+    
+  </channel>
+</rss>
